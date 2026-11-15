@@ -1,0 +1,50 @@
+flowchart LR
+  %% FluxPlane · 多模态特征融合
+  subgraph g2["01  数据接入与特征融合"]
+    sources["<b>多源数据</b><br/>结构化记录 + 文档文本<br/>数据库 · 文件 · HTTP JSON<br/>TXT / Markdown / 文本 PDF<br/>订单 · 商品 · 退款 · 业务说明"]:::external
+    ingest["<b>数据接入</b><br/>连接器 · 同步任务<br/>识别来源变化，形成数据快照<br/>提取字段并统计数据分布<br/>数据库、文件、接口与文档"]:::compute
+    features["<b>特征融合</b><br/>SQL · 时间窗口 · 文本算子<br/>按实体关联多源信息<br/>依赖数据变化后刷新特征<br/>关联 · 聚合 · 文本特征"]:::compute
+    published["<b>已发布数据</b><br/>版本目录 + Parquet<br/>数据快照与融合特征<br/>记录版本组合与产物位置<br/>版本发布 · 历史恢复"]:::state
+  end
+  subgraph g8["02  自然语言分析"]
+    workbench["<b>分析工作台</b><br/>自然语言 / SQL<br/>选择表、文档与特征<br/>提问，检查计划并确认执行<br/>数据目录 · REST API · 权限"]:::interface
+    planner["<b>分析规划</b><br/>问题 → 可执行查询<br/>根据字段和特征定义生成 SQL<br/>检查字段与查询范围<br/>分析模型 · 只读检查"]:::interface
+    query["<b>查询执行</b><br/>查询 worker · DuckDB<br/>读取固定版本的数据与特征<br/>执行计算或复用已有结果<br/>Arrow · 查询物化"]:::compute
+    result["<b>分析结果</b><br/>表格 / 图表 / 历史查询<br/>查看结果与所用版本<br/>跟踪任务进度和实际耗时<br/>分页浏览 · API · SSE"]:::interface
+  end
+  subgraph g14["03  调度与持续维护"]
+    scheduler["<b>任务调度</b><br/>依赖 · 优先级 · 资源配额<br/>查询与后台两个执行池<br/>任务租约、重试与空闲借用<br/>同步 · 刷新 · 查询"]:::compute
+    catalog["<b>共享目录与任务</b><br/>PostgreSQL / SQLite<br/>数据源与字段  /  特征定义与依赖<br/>任务记录与状态  /  版本组合与发布历史<br/>API、调度器与 worker 共享持久记录"]:::state
+    optimize["<b>后台优化</b><br/>查询复用 · 数据分区<br/>为稳定的重复查询构建物化结果<br/>按常用过滤字段组织分区<br/>验证结果 · 记录收益"]:::compute
+  end
+  sources -->|"接入"| ingest
+  ingest -.->|"更新"| features
+  features -->|"发布"| published
+  ingest -->|"数据快照"| published
+  workbench -->|"问题 / 计划"| planner
+  planner -->|"确认执行"| query
+  query -->|"结果"| result
+  published -->|"固定版本"| query
+  catalog -.->|"字段定义"| planner
+  scheduler -.->|"任务状态"| catalog
+  catalog -.->|"任务 / 状态"| query
+  query -.->|"重复查询"| optimize
+  optimize -->|"复用产物"| published
+  linkStyle 0 stroke:#5ad1e6,stroke-width:1.5px
+  linkStyle 1 stroke:#6fdc8c,stroke-width:1.5px
+  linkStyle 2 stroke:#5ad1e6,stroke-width:1.5px
+  linkStyle 3 stroke:#5ad1e6,stroke-width:1.5px
+  linkStyle 4 stroke:#79a8ff,stroke-width:1.5px
+  linkStyle 5 stroke:#79a8ff,stroke-width:1.5px
+  linkStyle 6 stroke:#5ad1e6,stroke-width:1.5px
+  linkStyle 7 stroke:#5ad1e6,stroke-width:1.5px
+  linkStyle 8 stroke:#e8b25d,stroke-width:1.5px
+  linkStyle 9 stroke:#e8b25d,stroke-width:1.5px
+  linkStyle 10 stroke:#6fdc8c,stroke-width:1.5px
+  linkStyle 11 stroke:#6fdc8c,stroke-width:1.5px
+  linkStyle 12 stroke:#5ad1e6,stroke-width:1.5px
+  classDef interface fill:#0e141b,stroke:#79a8ff,color:#c9d1d9
+  classDef compute fill:#0e141b,stroke:#6fdc8c,color:#c9d1d9
+  classDef state fill:#0e141b,stroke:#5ad1e6,color:#c9d1d9
+  classDef external fill:#0e141b,stroke:#e8b25d,color:#c9d1d9
+  classDef none fill:#0e141b,stroke:#3a4450,color:#c9d1d9

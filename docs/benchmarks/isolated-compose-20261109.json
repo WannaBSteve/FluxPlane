@@ -1,0 +1,37 @@
+{
+  "checked_at_utc": "2026-11-09T22:30:22.191849+00:00",
+  "base_url": "http://127.0.0.1:8095",
+  "web_status": 200,
+  "ready_status": "ready",
+  "role": "admin",
+  "counts": {
+    "sources": 5,
+    "datasets": 5,
+    "features": 5,
+    "releases": 18
+  },
+  "materialization_view": {
+    "records_returned": 30,
+    "current_active": 1,
+    "first_status": "active"
+  },
+  "pools": [
+    {
+      "lane": "query",
+      "capacity": 1,
+      "max_capacity": 2,
+      "running": 0,
+      "pending": 0
+    },
+    {
+      "lane": "background",
+      "capacity": 1,
+      "max_capacity": 1,
+      "running": 0,
+      "pending": 0
+    }
+  ],
+  "control_request_samples": 100,
+  "control_request_p50_ms": 13.79,
+  "control_request_p95_ms": 16.64
+}

@@ -1,0 +1,37 @@
+{
+  "phase": "restore",
+  "earlier_release_id": "8ee413dc7b14424bb3b0f14f59c11e73",
+  "earlier_republished_as": "8fc366534fa349eeb1cfa58320647d41",
+  "earlier_orders_watermark": "2026-11-09T22:17:13.186082+00:00",
+  "current_release_id": "7710271896ac4b0e936e9dd6e0a47bbd",
+  "current_republished_as": "68783a80865142f3890abeeba9107747",
+  "current_orders_watermark": "2026-11-09T22:17:38.408413+00:00",
+  "earlier_report": [
+    {
+      "category": "Accessories",
+      "order_count": 3,
+      "net_cents": "23000",
+      "guidance_documents": 2
+    },
+    {
+      "category": "Displays",
+      "order_count": 1,
+      "net_cents": "16000",
+      "guidance_documents": 2
+    }
+  ],
+  "current_report": [
+    {
+      "category": "Accessories",
+      "order_count": 3,
+      "net_cents": "27000",
+      "guidance_documents": 2
+    },
+    {
+      "category": "Displays",
+      "order_count": 1,
+      "net_cents": "16000",
+      "guidance_documents": 2
+    }
+  ]
+}

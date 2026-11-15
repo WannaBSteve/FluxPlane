@@ -1,0 +1,128 @@
+x-runtime-environment: &runtime_env
+  FLUXPLANE_DATABASE_URL: postgresql+psycopg://fluxplane:${FLUXPLANE_DB_PASSWORD:-fluxplane-local-dev}@postgres:5432/fluxplane
+  FLUXPLANE_ARTIFACT_ROOT: /data/artifacts
+  FLUXPLANE_SOURCE_ROOT: /data/sources
+  FLUXPLANE_API_KEY: ${FLUXPLANE_API_KEY-fluxplane-local-demo}
+  FLUXPLANE_OPERATOR_API_KEY: ${FLUXPLANE_OPERATOR_API_KEY:-}
+  FLUXPLANE_VIEWER_API_KEY: ${FLUXPLANE_VIEWER_API_KEY:-}
+  FLUXPLANE_HTTP_ALLOWED_HOSTS: ${FLUXPLANE_HTTP_ALLOWED_HOSTS:-}
+  FLUXPLANE_QUERY_WORKERS: ${FLUXPLANE_QUERY_WORKERS:-1}
+  FLUXPLANE_BACKGROUND_WORKERS: ${FLUXPLANE_BACKGROUND_WORKERS:-1}
+  FLUXPLANE_WORKER_LEASE_SECONDS: ${FLUXPLANE_WORKER_LEASE_SECONDS:-120}
+  FLUXPLANE_BACKGROUND_BORROW_GRACE_MS: ${FLUXPLANE_BACKGROUND_BORROW_GRACE_MS:-500}
+  FLUXPLANE_RESOURCE_CPU_MILLICORES: ${FLUXPLANE_RESOURCE_CPU_MILLICORES:-2000}
+  FLUXPLANE_RESOURCE_MEMORY_MB: ${FLUXPLANE_RESOURCE_MEMORY_MB:-2048}
+  FLUXPLANE_REMOTE_POLL_SECONDS: ${FLUXPLANE_REMOTE_POLL_SECONDS:-60}
+  FLUXPLANE_MATERIALIZATION_MAX_BYTES: ${FLUXPLANE_MATERIALIZATION_MAX_BYTES:-268435456}
+  FLUXPLANE_MATERIALIZATION_STALE_SECONDS: ${FLUXPLANE_MATERIALIZATION_STALE_SECONDS:-86400}
+  FLUXPLANE_POSTGRES_FULL_RECONCILE_SECONDS: ${FLUXPLANE_POSTGRES_FULL_RECONCILE_SECONDS:-86400}
+  FLUXPLANE_HTTP_FULL_RECONCILE_SECONDS: ${FLUXPLANE_HTTP_FULL_RECONCILE_SECONDS:-86400}
+  FLUXPLANE_DEMO_SOURCE_URL: postgresql+psycopg://demo:${FLUXPLANE_DEMO_DB_PASSWORD:-demo-local-only}@demo-postgres:5432/demo
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: fluxplane
+      POSTGRES_PASSWORD: ${FLUXPLANE_DB_PASSWORD:-fluxplane-local-dev}
+      POSTGRES_DB: fluxplane
+    volumes:
+      - metadata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fluxplane -d fluxplane"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    environment:
+      <<: *runtime_env
+      FLUXPLANE_ANALYSIS_BASE_URL: ${FLUXPLANE_ANALYSIS_BASE_URL:-}
+      FLUXPLANE_ANALYSIS_MODEL: ${FLUXPLANE_ANALYSIS_MODEL:-}
+      FLUXPLANE_ANALYSIS_API_KEY: ${FLUXPLANE_ANALYSIS_API_KEY:-}
+      FLUXPLANE_ANALYSIS_TIMEOUT_SECONDS: ${FLUXPLANE_ANALYSIS_TIMEOUT_SECONDS:-60}
+    volumes: &runtime_volumes
+      - ./runtime/artifacts:/data/artifacts
+      - ./runtime/sources:/data/sources
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8040/health/ready', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+
+  worker-query:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    command: ["fluxplane", "worker", "--lane", "query"]
+    environment: *runtime_env
+    volumes: *runtime_volumes
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  worker-background:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    command: ["fluxplane", "worker", "--lane", "background"]
+    environment: *runtime_env
+    volumes: *runtime_volumes
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  scheduler:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    command: ["fluxplane", "scheduler"]
+    environment: *runtime_env
+    volumes: *runtime_volumes
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.web
+    ports:
+      - "127.0.0.1:${FLUXPLANE_WEB_PORT:-8088}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  demo-postgres:
+    profiles: [demo]
+    image: postgres:16
+    environment:
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: ${FLUXPLANE_DEMO_DB_PASSWORD:-demo-local-only}
+      POSTGRES_DB: demo
+    volumes:
+      - demo_source_metadata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U demo -d demo"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  demo-source:
+    profiles: [demo]
+    image: python:3.13-slim-bookworm
+    command: ["python", "/app/http_demo_source.py"]
+    volumes:
+      - ./runtime/sources:/data/sources:ro
+      - ./examples/http_demo_source.py:/app/http_demo_source.py:ro
+
+volumes:
+  metadata:
+  demo_source_metadata:
+

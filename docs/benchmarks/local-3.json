@@ -1,0 +1,47 @@
+{
+  "host": "Linux-5.4.0-216-generic-x86_64-with-glibc2.35",
+  "python": "3.13.11",
+  "cpu_count": 80,
+  "duckdb": "1.5.6",
+  "pyarrow": "24.0.0",
+  "rows": 1000000,
+  "mode": "single process, SQLite catalog, local Parquet, in-process API client",
+  "sync_ms": 263.77,
+  "query_baseline_ms": [
+    134.12,
+    139.15,
+    357.96,
+    339.93,
+    273.54
+  ],
+  "query_layout_ms": [
+    138.66,
+    129.43,
+    163.2,
+    134.75,
+    148.57
+  ],
+  "query_median_speedup": 1.973,
+  "engine_baseline_ms": [
+    126.59,
+    389.84,
+    317.96,
+    133.61,
+    112.15
+  ],
+  "engine_layout_ms": [
+    75.02,
+    77.08,
+    283.7,
+    488.71,
+    78.9
+  ],
+  "engine_median_speedup": 1.693,
+  "layout_build_ms": 2887.06,
+  "layout_probe_baseline_ms": 106.4,
+  "layout_probe_organized_ms": 62.0,
+  "layout_files": 4,
+  "source_snapshot_bytes": 1459432,
+  "layout_bytes": 2814354,
+  "control_get_p95_ms": 9.23
+}

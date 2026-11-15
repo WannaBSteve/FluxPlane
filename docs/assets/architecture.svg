@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="875" viewBox="0 0 1220 875" role="img" aria-labelledby="title desc">
+<title id="title">FluxPlane system architecture</title>
+<desc id="desc">User requests and external sources enter the service and adapter layers. A durable control plane schedules query and background workers. The system returns query results and status, and publishes versioned datasets and features.</desc>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#8da2bb"/></marker></defs>
+<g font-family="DejaVu Sans, Arial, sans-serif">
+<rect x="0" y="0" width="1220" height="875" rx="0" fill="#fff" stroke="#fff"/>
+<rect x="24" y="24" width="8" height="42" rx="3" fill="#2563eb" stroke="#2563eb"/>
+<text x="48" y="55" font-size="32" fill="#162a44" font-weight="700" text-anchor="start">FluxPlane</text>
+<text x="48" y="81" font-size="15" fill="#65788f" font-weight="400" text-anchor="start">Multi-source analytics with durable scheduling and versioned updates</text>
+<rect x="250" y="122" width="720" height="96" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="271" y="151" font-size="11" fill="#6b7f99" font-weight="700" text-anchor="start">01 / INTERACT</text>
+<text x="271" y="176" font-size="18" fill="#162a44" font-weight="700" text-anchor="start">Console &amp; API</text>
+<text x="271" y="198" font-size="12" fill="#64768e" font-weight="400" text-anchor="start">Submit work and inspect results</text>
+<path d="M520 140 V200" fill="none" stroke="#dbe4ef" stroke-width="1"/>
+<rect x="538.0" y="151.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="604.0" y="175.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Web console</text>
+<rect x="678.0" y="151.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="744.0" y="175.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">REST API</text>
+<rect x="818.0" y="151.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="884.0" y="175.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">SSE / CLI</text>
+<rect x="250" y="234" width="720" height="116" rx="12" fill="#edf4ff" stroke="#b6cef3"/>
+<text x="271" y="263" font-size="11" fill="#6b7f99" font-weight="700" text-anchor="start">02 / DECIDE</text>
+<text x="271" y="288" font-size="18" fill="#162a44" font-weight="700" text-anchor="start">Control plane</text>
+<text x="271" y="310" font-size="12" fill="#64768e" font-weight="400" text-anchor="start">Plan, schedule and publish</text>
+<path d="M520 252 V332" fill="none" stroke="#b6cef3" stroke-width="1"/>
+<rect x="538.0" y="273.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b6cef3"/>
+<text x="604.0" y="297.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Dependencies</text>
+<rect x="678.0" y="273.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b6cef3"/>
+<text x="744.0" y="297.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Scheduler</text>
+<rect x="818.0" y="273.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b6cef3"/>
+<text x="884.0" y="297.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Publisher</text>
+<rect x="250" y="366" width="720" height="116" rx="12" fill="#eff9f7" stroke="#b5ddd3"/>
+<text x="271" y="395" font-size="11" fill="#6b7f99" font-weight="700" text-anchor="start">03 / EXECUTE</text>
+<text x="271" y="420" font-size="18" fill="#162a44" font-weight="700" text-anchor="start">Worker runtime</text>
+<text x="271" y="442" font-size="12" fill="#64768e" font-weight="400" text-anchor="start">Query and background pools</text>
+<path d="M520 384 V464" fill="none" stroke="#b5ddd3" stroke-width="1"/>
+<rect x="538.0" y="405.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b5ddd3"/>
+<text x="604.0" y="429.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">SQL &amp; features</text>
+<rect x="678.0" y="405.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b5ddd3"/>
+<text x="744.0" y="429.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Documents</text>
+<rect x="818.0" y="405.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#b5ddd3"/>
+<text x="884.0" y="429.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Maintenance</text>
+<rect x="250" y="498" width="720" height="96" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="271" y="527" font-size="11" fill="#6b7f99" font-weight="700" text-anchor="start">04 / CONNECT</text>
+<text x="271" y="552" font-size="18" fill="#162a44" font-weight="700" text-anchor="start">Source adapters</text>
+<text x="271" y="574" font-size="12" fill="#64768e" font-weight="400" text-anchor="start">Read source changes into snapshots</text>
+<path d="M520 516 V576" fill="none" stroke="#dbe4ef" stroke-width="1"/>
+<rect x="538.0" y="527.0" width="97.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="586.5" y="551.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Databases</text>
+<rect x="643.0" y="527.0" width="97.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="691.5" y="551.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Files</text>
+<rect x="748.0" y="527.0" width="97.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="796.5" y="551.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">HTTP</text>
+<rect x="853.0" y="527.0" width="97.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="901.5" y="551.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Documents</text>
+<rect x="250" y="610" width="720" height="116" rx="12" fill="#f7f9fd" stroke="#dbe4ef"/>
+<text x="271" y="639" font-size="11" fill="#6b7f99" font-weight="700" text-anchor="start">05 / PERSIST</text>
+<text x="271" y="664" font-size="18" fill="#162a44" font-weight="700" text-anchor="start">Durable state</text>
+<text x="271" y="686" font-size="12" fill="#64768e" font-weight="400" text-anchor="start">Tasks, versions and artifacts</text>
+<path d="M520 628 V708" fill="none" stroke="#dbe4ef" stroke-width="1"/>
+<rect x="538.0" y="649.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="604.0" y="673.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Catalog</text>
+<rect x="678.0" y="649.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="744.0" y="673.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Artifacts</text>
+<rect x="818.0" y="649.0" width="132.0" height="38" rx="8" fill="#fff" stroke="#dbe4ef"/>
+<text x="884.0" y="673.0" font-size="13" fill="#23354e" font-weight="550" text-anchor="middle">Release pointers</text>
+<path d="M610 219 V231" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M610 351 V363" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M610 483 V495" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M610 595 V607" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="24" y="122" width="202" height="96" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="43" y="149" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">REQUESTS</text>
+<text x="43" y="176" font-size="14" fill="#23354e" font-weight="600" text-anchor="start">SQL · sync · refresh</text>
+<text x="43" y="198" font-size="11" fill="#65788f" font-weight="400" text-anchor="start">from users or applications</text>
+<path d="M227 170 H247" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="24" y="498" width="202" height="228" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="43" y="525" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">DATA SOURCES</text>
+<text x="43" y="559" font-size="13" fill="#23354e" font-weight="550" text-anchor="start">PostgreSQL / SQLite</text>
+<text x="43" y="596" font-size="13" fill="#23354e" font-weight="550" text-anchor="start">CSV / Parquet / JSON</text>
+<text x="43" y="633" font-size="13" fill="#23354e" font-weight="550" text-anchor="start">HTTP JSON APIs</text>
+<text x="43" y="670" font-size="13" fill="#23354e" font-weight="550" text-anchor="start">Text / Markdown / PDF</text>
+<path d="M227 546 H247" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="994" y="122" width="202" height="96" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="1013" y="149" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">RESPONSES</text>
+<text x="1013" y="176" font-size="13" fill="#23354e" font-weight="600" text-anchor="start">Results &amp; task status</text>
+<text x="1013" y="198" font-size="11" fill="#65788f" font-weight="400" text-anchor="start">available in the console / API</text>
+<path d="M971 170 H991" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="994" y="366" width="202" height="116" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="1013" y="393" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">RUNNING SIGNALS</text>
+<text x="1013" y="421" font-size="13" fill="#23354e" font-weight="600" text-anchor="start">Queue &amp; task duration</text>
+<text x="1013" y="446" font-size="13" fill="#23354e" font-weight="600" text-anchor="start">CPU time &amp; memory</text>
+<path d="M971 424 H991" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="994" y="610" width="202" height="116" rx="12" fill="#f8fafc" stroke="#dbe4ef"/>
+<text x="1013" y="637" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">PUBLISHED OUTPUT</text>
+<text x="1013" y="665" font-size="13" fill="#23354e" font-weight="600" text-anchor="start">Dataset snapshots</text>
+<text x="1013" y="690" font-size="13" fill="#23354e" font-weight="600" text-anchor="start">Features &amp; releases</text>
+<path d="M971 668 H991" fill="none" stroke="#8da2bb" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="250" y="748" width="720" height="68" rx="12" fill="#f3f6fb" stroke="#dbe4ef"/>
+<text x="270" y="775" font-size="11" fill="#5d7290" font-weight="700" text-anchor="start">SHARED SERVICES</text>
+<text x="270" y="798" font-size="14" fill="#304862" font-weight="550" text-anchor="start">Access control     ·     Durable events     ·     Metrics and logs</text>
+<text x="24" y="853" font-size="11" fill="#687b91" font-weight="400" text-anchor="start">Layers show responsibilities; requests, data and feedback move through them in both directions.</text>
+</g></svg>

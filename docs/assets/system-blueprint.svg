@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="824" viewBox="0 0 1280 824" role="img" aria-labelledby="title desc">
+<title id="title">FluxPlane system blueprint</title><desc id="desc">Structured data and document text feed background workers. A scheduler manages two pools. Queries read published snapshots; metadata and artifacts persist separately.</desc>
+<defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.9" fill="#9bb3ce" opacity="0.22"/></pattern><filter id="shadow" x="-20%" y="-30%" width="140%" height="180%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#28476f" flood-opacity="0.07"/></filter></defs>
+<g font-family="Trebuchet MS, DejaVu Sans, sans-serif">
+<rect x="1" y="1" width="1278" height="822" rx="20" fill="#f8faff" stroke="#d7e2ef"/>
+<rect x="20" y="100" width="1240" height="704" fill="url(#dots)"/>
+<text x="32" y="31" font-size="11" fill="#3266da" font-weight="700" text-anchor="start">FLUXPLANE / SYSTEM BLUEPRINT</text>
+<text x="32" y="65" font-size="28" fill="#193454" font-weight="700" text-anchor="start">Multimodal features, continuously maintained</text>
+<text x="32" y="89" font-size="13" fill="#59718e" font-weight="400" text-anchor="start">Structured records and document text, connected through features and versioned analytics.</text>
+<rect x="304" y="116" width="656" height="64" rx="12" fill="#fff" stroke="#d7e2ef" filter="url(#shadow)"/>
+<g transform="translate(324 135) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18"/></g>
+<text x="364" y="143" font-size="17" fill="#193454" font-weight="700" text-anchor="start">Console / REST API / CLI</text>
+<text x="364" y="164" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Submit SQL, synchronize data, refresh features, inspect runs</text>
+<rect x="32" y="202" width="232" height="369" rx="12" fill="#fff" stroke="#d7e2ef" filter="url(#shadow)"/>
+<text x="52" y="231" font-size="12" fill="#3266da" font-weight="700" text-anchor="start">01 / DATA SOURCES</text>
+<g transform="translate(52 257) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></g>
+<text x="88" y="267" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Databases</text>
+<text x="88" y="287" font-size="10" fill="#59718e" font-weight="400" text-anchor="start">PostgreSQL / SQLite</text>
+<g transform="translate(52 326) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h9l5 5v15H5Zm9 0v6h5M8 12h8M8 16h8"/></g>
+<text x="88" y="336" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Files</text>
+<text x="88" y="356" font-size="10" fill="#59718e" font-weight="400" text-anchor="start">CSV / Parquet / JSON</text>
+<g transform="translate(52 395) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18"/></g>
+<text x="88" y="405" font-size="15" fill="#193454" font-weight="700" text-anchor="start">HTTP APIs</text>
+<text x="88" y="425" font-size="10" fill="#59718e" font-weight="400" text-anchor="start">JSON + cursor / pagination</text>
+<g transform="translate(52 464) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2h9l5 5v15H5Zm9 0v6h5M8 12h8M8 16h8"/></g>
+<text x="88" y="474" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Documents</text>
+<text x="88" y="494" font-size="10" fill="#59718e" font-weight="400" text-anchor="start">Markdown / text-layer PDF</text>
+<text x="52" y="546" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">Adapters produce source snapshots</text>
+<rect x="304" y="202" width="656" height="154" rx="12" fill="#edf3ff" stroke="#bdcfee"/>
+<text x="324" y="230" font-size="12" fill="#3266da" font-weight="700" text-anchor="start">02 / ORCHESTRATION</text>
+<rect x="324" y="247" width="200" height="88" rx="12" fill="#fff" stroke="#d7e2ef"/>
+<g transform="translate(338 262) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14m0-7h12V5m0 7v7"/><rect x="3" y="2" width="6" height="6" rx="2"/><rect x="15" y="2" width="6" height="6" rx="2"/><rect x="3" y="16" width="6" height="6" rx="2"/><rect x="15" y="16" width="6" height="6" rx="2"/></g>
+<text x="371" y="279" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Dependencies</text>
+<text x="338" y="315" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Persistent task graph</text>
+<rect x="532" y="247" width="200" height="88" rx="12" fill="#fff" stroke="#d7e2ef"/>
+<g transform="translate(546 262) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></g>
+<text x="579" y="279" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Scheduler</text>
+<text x="546" y="315" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Source + time triggers</text>
+<rect x="740" y="247" width="200" height="88" rx="12" fill="#fff" stroke="#d7e2ef"/>
+<g transform="translate(754 262) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 4v6c0 5-5 8-9 10-4-2-9-5-9-10V6Z"/><path d="m7 12 3 3 7-7"/></g>
+<text x="787" y="279" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Admission</text>
+<text x="754" y="315" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">CPU / memory budgets</text>
+<path d="M632 180V202" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M628 194L632 200L636 194" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M466 356V408" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M462 402L466 408L470 402" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M798 356V408" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M794 402L798 408L802 402" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<text x="632" y="382" font-size="11" fill="#59718e" font-weight="400" text-anchor="middle">dispatch / lease / retry</text>
+<rect x="304" y="408" width="312" height="156" rx="12" fill="#eef8f5" stroke="#b7dcd2" filter="url(#shadow)"/>
+<rect x="648" y="408" width="312" height="156" rx="12" fill="#edf3ff" stroke="#bdcfee" filter="url(#shadow)"/>
+<g transform="translate(324 429) scale(1)" fill="none" stroke="#178675" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14m0-7h12V5m0 7v7"/><rect x="3" y="2" width="6" height="6" rx="2"/><rect x="15" y="2" width="6" height="6" rx="2"/><rect x="3" y="16" width="6" height="6" rx="2"/><rect x="15" y="16" width="6" height="6" rx="2"/></g>
+<text x="360" y="448" font-size="18" fill="#193454" font-weight="700" text-anchor="start">Background pool</text>
+<text x="324" y="484" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Sync / feature refresh / text operators</text>
+<text x="324" y="508" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Materialization + layout maintenance</text>
+<g transform="translate(668 429) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18"/></g>
+<text x="704" y="448" font-size="18" fill="#193454" font-weight="700" text-anchor="start">Query pool</text>
+<text x="668" y="484" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Read-only SQL over pinned snapshots</text>
+<text x="668" y="508" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">DuckDB execution + paginated results</text>
+<text x="324" y="543" font-size="11" fill="#178675" font-weight="400" text-anchor="start">Arrow / DuckDB / registered operators</text>
+<text x="668" y="543" font-size="11" fill="#3266da" font-weight="400" text-anchor="start">Input versions fixed at submission</text>
+<path d="M264 529H304" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M296 525L302 529L296 533" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M460 564V591H804V566" fill="none" stroke="#59718e" stroke-width="2" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="632" y="614" font-size="11" fill="#59718e" font-weight="400" text-anchor="middle">Idle background workers may help query execution</text>
+<rect x="1000" y="202" width="248" height="362" rx="12" fill="#fff" stroke="#d7e2ef" filter="url(#shadow)"/>
+<text x="1020" y="231" font-size="12" fill="#3266da" font-weight="700" text-anchor="start">03 / VISIBLE OUTPUT</text>
+<g transform="translate(1020 259) scale(1)" fill="none" stroke="#178675" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 9-5 9 5-9 5Zm0 5 9 5 9-5M3 17l9 5 9-5"/></g>
+<text x="1056" y="276" font-size="14" fill="#193454" font-weight="700" text-anchor="start">Published releases</text>
+<text x="1020" y="305" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Dataset + feature versions</text>
+<g transform="translate(1020 345) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 13h5l3-9 5 17 3-8h6"/></g>
+<text x="1056" y="362" font-size="14" fill="#193454" font-weight="700" text-anchor="start">Run observability</text>
+<text x="1020" y="391" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Task state / CPU / RSS</text>
+<g transform="translate(1020 431) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 5-6 7 6 7m8-14 6 7-6 7m-3-16-2 18"/></g>
+<text x="1056" y="448" font-size="14" fill="#193454" font-weight="700" text-anchor="start">Query results</text>
+<text x="1020" y="477" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Rows / pages / input versions</text>
+<path d="M960 475H1000" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M991 471L997 475L991 479" fill="none" stroke="#3266da" stroke-width="2" stroke-linejoin="round"/>
+<path d="M960 279H1000" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M991 275L997 279L991 283" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<text x="966" y="267" font-size="9" fill="#178675" font-weight="400" text-anchor="start">publish</text>
+<text x="1020" y="540" font-size="12" fill="#59718e" font-weight="400" text-anchor="start">Console + authenticated API</text>
+<rect x="304" y="650" width="656" height="115" rx="12" fill="#fff" stroke="#d7e2ef" filter="url(#shadow)"/>
+<text x="324" y="677" font-size="12" fill="#3266da" font-weight="700" text-anchor="start">04 / DURABLE STATE</text>
+<g transform="translate(324 701) scale(1)" fill="none" stroke="#3266da" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></g>
+<text x="360" y="713" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Metadata catalog</text>
+<text x="360" y="737" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">PostgreSQL: tasks, leases, releases</text>
+<g transform="translate(661 701) scale(1)" fill="none" stroke="#178675" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 9-5 9 5-9 5Zm0 5 9 5 9-5M3 17l9 5 9-5"/></g>
+<text x="697" y="713" font-size="15" fill="#193454" font-weight="700" text-anchor="start">Immutable artifacts</text>
+<text x="697" y="737" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">Parquet: data, features, results</text>
+<path d="M460 564V575H284V708H304" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M296 704L302 708L296 712" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M804 650V634H980V524H960" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<path d="M800 644L804 650L808 644" fill="none" stroke="#178675" stroke-width="2" stroke-linejoin="round"/>
+<text x="989" y="628" font-size="10" fill="#178675" font-weight="400" text-anchor="start">read / write</text>
+<g transform="translate(37 708) scale(1)" fill="none" stroke="#59718e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 4v6c0 5-5 8-9 10-4-2-9-5-9-10V6Z"/><path d="m7 12 3 3 7-7"/></g>
+<text x="73" y="720" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">Schema + version checks</text>
+<text x="32" y="748" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">before publication</text>
+<text x="1020" y="708" font-size="12" fill="#193454" font-weight="700" text-anchor="start">Instance API roles</text>
+<text x="1020" y="731" font-size="11" fill="#59718e" font-weight="400" text-anchor="start">Admin / operator / viewer</text>
+<path d="M32 783H1248" fill="none" stroke="#d7e2ef" stroke-width="1" stroke-linejoin="round"/>
+<text x="32" y="806" font-size="11" fill="#3266da" font-weight="400" text-anchor="start">Blue: requests and scheduling</text>
+<text x="316" y="806" font-size="11" fill="#178675" font-weight="400" text-anchor="start">Teal: data and publication</text>
+<text x="1248" y="806" font-size="11" fill="#59718e" font-weight="400" text-anchor="end">Single-host deployment / SQLite catalog available for development</text>
+</g></svg>

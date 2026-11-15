@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">FluxPlane</title>
+  <desc id="desc">Three connected data planes inside a blue rounded square.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#3979ff"/>
+      <stop offset="1" stop-color="#1745bd"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="30" fill="url(#blue)"/>
+  <g stroke="#fff" stroke-width="3.5" stroke-linejoin="round">
+    <path d="M28 79 64 61 100 79 64 97Z" fill="#80b5ff"/>
+    <path d="M28 63 64 45 100 63 64 81Z" fill="#b9d6ff"/>
+    <path d="M28 47 64 29 100 47 64 65Z" fill="#edf5ff"/>
+  </g>
+  <path d="M64 65V97" fill="none" stroke="#fff" stroke-width="3.5"/>
+  <circle cx="100" cy="79" r="5" fill="#65dfc2" stroke="#fff" stroke-width="2"/>
+</svg>

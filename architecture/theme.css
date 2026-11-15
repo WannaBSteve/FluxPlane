@@ -1,0 +1,4 @@
+:root { --dim: #65738a; }
+.box { font-size: 14px; }
+.ttl { font-size: 16px; }
+.sub, .hr + .c { font-size: 13px; }

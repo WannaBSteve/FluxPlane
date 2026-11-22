@@ -186,7 +186,11 @@ def _http_rows(url: str, allowed_hosts: list[str], config: dict) -> tuple[list[d
     digest = hashlib.sha256()
     seen: set[str] = set()
     next_url: str | None = url
-    with httpx.Client(timeout=20, follow_redirects=False) as client:
+    # Source URLs are allow-listed and every pagination hop is checked below.  Do not
+    # inherit workstation proxy settings: a proxy can both break same-host sources
+    # (notably local development endpoints) and make the validated destination differ
+    # from the network peer that actually receives the request.
+    with httpx.Client(timeout=20, follow_redirects=False, trust_env=False) as client:
         while next_url is not None:
             target = urlparse(next_url)
             if (target.scheme != parsed.scheme or target.hostname != parsed.hostname or
@@ -372,4 +376,3 @@ def read_snapshot(kind: str, config: dict, source_object: str, settings: Setting
         })
         return SourceSnapshot(table, _hash_file(path))
     raise ValueError("unsupported source kind")
-

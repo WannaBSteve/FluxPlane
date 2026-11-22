@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "record_type": "upstream_official_results_snapshot",
+  "source": {
+    "package": "multabench",
+    "version": "0.2.1",
+    "dataset": "MUL_TEXT_CONSUMER_COMPLAINT",
+    "size": "10k",
+    "protocol": "3 folds x 2 repeats; 10000 train and 5000 test per split",
+    "metric": "multiclass_log_loss_lower_is_better"
+  },
+  "warning": "These are results shipped by the official package, not reruns produced by FluxPlane.",
+  "results": {
+    "CatBoost_raw": {
+      "folds": [0.569409, 0.576923, 0.567161, 0.567476, 0.573644, 0.572769],
+      "mean": 0.571230
+    },
+    "CatBoost_TFIDF": {
+      "folds": [0.568568, 0.577085, 0.567894, 0.567118, 0.570301, 0.566633],
+      "mean": 0.569600
+    },
+    "CASE_CatBoost": {
+      "folds": [0.566203, 0.575605, 0.567137, 0.559002, 0.570092, 0.572634],
+      "mean": 0.568446
+    },
+    "CatBoost_E5_large": {
+      "folds": [0.567659, 0.569838, 0.571120, 0.568524, 0.571286, 0.569634],
+      "mean": 0.569677
+    },
+    "CatBoost_E5_large_target_aware": {
+      "folds": [0.564809, 0.570206, 0.564251, 0.562775, 0.567523, 0.568899],
+      "mean": 0.566411
+    },
+    "TabSTAR_v1_1_raw": {
+      "folds": [0.569405, 0.559963, 0.569582, 0.574642, 0.587582, 0.569299],
+      "mean": 0.571745
+    },
+    "TabPFN_3_5_E5_large": {
+      "folds": [0.523554, 0.525958, 0.522619, 0.520836, 0.524030, 0.518639],
+      "mean": 0.522606
+    },
+    "EXAONE_Tabular_E5_large": {
+      "folds": [0.517656, 0.522016, 0.519339, 0.519256, 0.526263, 0.517601],
+      "mean": 0.520355
+    }
+  }
+}

@@ -294,6 +294,7 @@ npm run check:api
 | [部署与恢复](docs/operations.md) | 容器部署、备份、恢复与部署检查 |
 | [扩展接口](docs/extensions.md) | 增加来源连接器、特征算子和后台任务 |
 | [性能报告](docs/performance-report.md) | 测量条件、结果及复测命令 |
+| [研究实验](experiments/README.md) | 任务、方法、基线、评测协议与完整结果 |
 
 <details>
 <summary>代码导航</summary>

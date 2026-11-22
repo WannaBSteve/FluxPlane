@@ -44,6 +44,7 @@ services:
       FLUXPLANE_ANALYSIS_MODEL: ${FLUXPLANE_ANALYSIS_MODEL:-}
       FLUXPLANE_ANALYSIS_API_KEY: ${FLUXPLANE_ANALYSIS_API_KEY:-}
       FLUXPLANE_ANALYSIS_TIMEOUT_SECONDS: ${FLUXPLANE_ANALYSIS_TIMEOUT_SECONDS:-60}
+      FLUXPLANE_ANALYSIS_RESPONSE_FORMAT: ${FLUXPLANE_ANALYSIS_RESPONSE_FORMAT:-false}
     volumes: &runtime_volumes
       - ./runtime/artifacts:/data/artifacts
       - ./runtime/sources:/data/sources
@@ -125,4 +126,3 @@ services:
 volumes:
   metadata:
   demo_source_metadata:
-

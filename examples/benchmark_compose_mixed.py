@@ -151,6 +151,7 @@ def measure(client: httpx.Client, setup: dict, queries: int, deadline_ms: int,
     rss = [job["worker_rss_mb"] for job in job_records if job["worker_rss_mb"] is not None]
     return {"dataset": dataset, "rows": setup["rows"], "queries": queries,
             "features": len(setup["feature_ids"]), "deadline_ms": deadline_ms,
+            "query_mean_ms": round(statistics.mean(timings["query"]), 2),
             "query_p50_ms": round(statistics.median(timings["query"]), 2),
             "query_p95_ms": round(percentile(timings["query"], 0.95), 2),
             "feature_completion_ms": [round(value, 2) for value in timings["background"]],
@@ -216,6 +217,8 @@ def run(args: argparse.Namespace) -> dict:
     if len({item["result_digest"] for item in runs}) != 1:
         raise AssertionError("query results differ between scheduling modes")
     summary = {mode: {
+        "query_mean_ms": round(statistics.median(item["query_mean_ms"] for item in runs
+                                                 if item["mode"] == mode), 2),
         "query_p95_ms": round(statistics.median(item["query_p95_ms"] for item in runs
                                                if item["mode"] == mode), 2),
         "feature_deadline_rate": round(statistics.mean(item["feature_deadline_rate"]

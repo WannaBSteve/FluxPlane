@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import statistics
 import tempfile
 import time
@@ -16,6 +15,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 from fluxplane.application.service import Platform
 from fluxplane.config import Settings
+from fluxplane.profiling.runtime import process_rss_mb
 from fluxplane.scheduling.jobs import claim, claim_for_worker
 from fluxplane.storage.models import Job
 from sqlalchemy import select
@@ -38,8 +38,7 @@ def execute_setup(platform: Platform, job_id: str) -> None:
 
 
 def rss_mb() -> float:
-    pages = int(Path("/proc/self/statm").read_text().split()[1])
-    return pages * os.sysconf("SC_PAGE_SIZE") / (1024 * 1024)
+    return process_rss_mb() or 0.0
 
 
 def measure(mode: str, rows: int, query_count: int, feature_count: int,
@@ -187,6 +186,7 @@ def measure(mode: str, rows: int, query_count: int, feature_count: int,
             "borrow_grace_ms": (borrow_grace_ms if mode == "dynamic" else
                                 0 if mode == "immediate" else None),
             "workers": 2, "feature_deadline_ms": deadline_ms,
+            "query_mean_ms": round(statistics.mean(query_latencies), 2),
             "query_p50_ms": round(statistics.median(query_latencies), 2),
             "query_p95_ms": round(percentile(query_latencies, 0.95), 2),
             "feature_completion_ms": [round(value, 2) for value in feature_latencies],

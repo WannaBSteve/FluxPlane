@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import os
+import resource
+import sys
 import time
 from pathlib import Path
 from threading import Event, Thread
@@ -10,12 +12,19 @@ from typing import Self
 
 
 def process_rss_mb() -> float | None:
-    """Return current resident memory on Linux; other platforms have no sample."""
+    """Return current RSS on Linux and peak RSS on other supported Unix hosts."""
     try:
         pages = int(Path("/proc/self/statm").read_text().split()[1])
         return pages * os.sysconf("SC_PAGE_SIZE") / (1024 * 1024)
     except (OSError, IndexError, ValueError):
-        return None
+        try:
+            peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+            # macOS reports bytes; Linux and most BSD variants report KiB.  Linux
+            # normally takes the /proc path above, but keep its documented unit here.
+            divisor = 1024 * 1024 if sys.platform == "darwin" else 1024
+            return peak / divisor
+        except (OSError, ValueError):
+            return None
 
 
 class RuntimeSampler:

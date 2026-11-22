@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "method": "FluxECR",
+  "consumer_response": {
+    "split": {
+      "method": "chronological_60_20_20",
+      "train": 20610,
+      "validation": 6870,
+      "test": 6871
+    },
+    "basic_tfidf": {
+      "macro_average_precision": 0.537388,
+      "macro_f1": 0.478547
+    },
+    "joint_frozen_e5_catboost": {
+      "macro_average_precision": 0.643487,
+      "macro_f1": 0.585411
+    },
+    "fluxecr": {
+      "macro_average_precision": 0.646519,
+      "macro_f1": 0.654710,
+      "macro_ovr_auroc": 0.911260,
+      "weighted_f1": 0.832598,
+      "accuracy": 0.827390
+    },
+    "relative_macro_f1_gain_vs_basic_pct": 36.812,
+    "relative_macro_f1_gain_vs_strong_joint_pct": 11.838
+  },
+  "fraud_variant_v": {
+    "metric": "tpr_at_5pct_fpr",
+    "catboost": 0.346908,
+    "provenance_gated_lightgbm": 0.493590,
+    "relative_gain_pct": 42.284
+  },
+  "mixed_scheduling_compose": {
+    "fixed_query_mean_ms": 7003.070,
+    "dynamic_query_mean_ms": 4931.656,
+    "mean_latency_reduction_pct": 29.579,
+    "fixed_query_p95_ms": 12386.730,
+    "dynamic_query_p95_ms": 7414.900,
+    "p95_latency_reduction_pct": 40.138,
+    "fixed_throughput_jobs_per_second": 1.950,
+    "dynamic_throughput_jobs_per_second": 3.199,
+    "throughput_gain_pct": 64.051,
+    "feature_deadline_rate": 1.0
+  }
+}

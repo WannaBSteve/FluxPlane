@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "experiment": "baf_temporal_dynamic_risk",
+  "protocol": "official month<6 train, month>=6 test",
+  "primary_metric": "tpr_at_5pct_fpr",
+  "datasets": [
+    {
+      "file": "Base.csv",
+      "rows": 1000000,
+      "fraud_rate": 0.011029,
+      "split": {
+        "train": 794989,
+        "test": 205011,
+        "rule": "month<6 / month>=6"
+      },
+      "feature_audit": {
+        "psi_threshold": 0.2,
+        "all_features": [
+          "income",
+          "name_email_similarity",
+          "prev_address_months_count",
+          "current_address_months_count",
+          "customer_age",
+          "days_since_request",
+          "intended_balcon_amount",
+          "payment_type",
+          "zip_count_4w",
+          "velocity_6h",
+          "velocity_24h",
+          "velocity_4w",
+          "bank_branch_count_8w",
+          "date_of_birth_distinct_emails_4w",
+          "employment_status",
+          "credit_risk_score",
+          "email_is_free",
+          "housing_status",
+          "phone_home_valid",
+          "phone_mobile_valid",
+          "bank_months_count",
+          "has_other_cards",
+          "proposed_credit_limit",
+          "foreign_request",
+          "source",
+          "session_length_in_minutes",
+          "device_os",
+          "keep_alive_session",
+          "device_distinct_emails_8w",
+          "device_fraud_count",
+          "month"
+        ],
+        "stable_features": [
+          "income",
+          "name_email_similarity",
+          "prev_address_months_count",
+          "current_address_months_count",
+          "customer_age",
+          "days_since_request",
+          "intended_balcon_amount",
+          "payment_type",
+          "bank_branch_count_8w",
+          "employment_status",
+          "email_is_free",
+          "housing_status",
+          "phone_home_valid",
+          "phone_mobile_valid",
+          "bank_months_count",
+          "has_other_cards",
+          "proposed_credit_limit",
+          "foreign_request",
+          "source",
+          "session_length_in_minutes",
+          "device_os",
+          "keep_alive_session",
+          "device_distinct_emails_8w",
+          "device_fraud_count"
+        ],
+        "dropped_features": [
+          "credit_risk_score",
+          "date_of_birth_distinct_emails_4w",
+          "month",
+          "velocity_24h",
+          "velocity_4w",
+          "velocity_6h",
+          "zip_count_4w"
+        ],
+        "provenance_policy": "reject anonymous x<number> fields without semantics",
+        "untrusted_features": [],
+        "psi": {
+          "bank_branch_count_8w": 0.033072,
+          "bank_months_count": 0.012486,
+          "credit_risk_score": 0.212023,
+          "current_address_months_count": 0.028274,
+          "customer_age": 0.015187,
+          "date_of_birth_distinct_emails_4w": 0.332253,
+          "days_since_request": 0.020855,
+          "device_distinct_emails_8w": 0.001467,
+          "device_fraud_count": 0.0,
+          "device_os": 0.008183,
+          "email_is_free": 0.013872,
+          "employment_status": 0.01672,
+          "foreign_request": 0.000568,
+          "has_other_cards": 0.000216,
+          "housing_status": 0.011143,
+          "income": 0.06819,
+          "intended_balcon_amount": 0.008412,
+          "keep_alive_session": 0.006072,
+          "month": 9.117825,
+          "name_email_similarity": 0.023884,
+          "payment_type": 0.013677,
+          "phone_home_valid": 0.014525,
+          "phone_mobile_valid": 0.0053,
+          "prev_address_months_count": 0.010918,
+          "proposed_credit_limit": 0.056939,
+          "session_length_in_minutes": 0.039924,
+          "source": 0.0001,
+          "velocity_24h": 1.596473,
+          "velocity_4w": 2.894201,
+          "velocity_6h": 0.922936,
+          "zip_count_4w": 0.420887
+        },
+        "uses_test_labels": false
+      },
+      "test_metrics": {
+        "b0_onehot_logistic": {
+          "tpr_at_5pct_fpr": 0.431897,
+          "average_precision": 0.116513,
+          "roc_auc": 0.85489,
+          "threshold": 0.91934323,
+          "age_fpr": {
+            "ratio": 0.28091,
+            "younger": 0.035313,
+            "older": 0.125709
+          }
+        },
+        "b1_lightgbm": {
+          "tpr_at_5pct_fpr": 0.54795,
+          "average_precision": 0.193649,
+          "roc_auc": 0.893332,
+          "threshold": 0.04535374,
+          "age_fpr": {
+            "ratio": 0.334824,
+            "younger": 0.037781,
+            "older": 0.112839
+          }
+        },
+        "b2_catboost": {
+          "tpr_at_5pct_fpr": 0.54795,
+          "average_precision": 0.19126,
+          "roc_auc": 0.892536,
+          "threshold": 0.04588119,
+          "age_fpr": {
+            "ratio": 0.317822,
+            "younger": 0.037055,
+            "older": 0.11659
+          }
+        },
+        "proposed_unlabeled_drift_gated_lightgbm": {
+          "tpr_at_5pct_fpr": 0.533356,
+          "average_precision": 0.183328,
+          "roc_auc": 0.888682,
+          "threshold": 0.03472344,
+          "age_fpr": {
+            "ratio": 0.299349,
+            "younger": 0.036234,
+            "older": 0.121043
+          }
+        },
+        "proposed_provenance_gated_lightgbm": {
+          "tpr_at_5pct_fpr": 0.54795,
+          "average_precision": 0.193649,
+          "roc_auc": 0.893332,
+          "threshold": 0.04535374,
+          "age_fpr": {
+            "ratio": 0.334824,
+            "younger": 0.037781,
+            "older": 0.112839
+          }
+        }
+      },
+      "wall_seconds": 296.118
+    },
+    {
+      "file": "Variant V.csv",
+      "rows": 1000000,
+      "fraud_rate": 0.01103,
+      "split": {
+        "train": 758328,
+        "test": 241672,
+        "rule": "month<6 / month>=6"
+      },
+      "feature_audit": {
+        "psi_threshold": 0.2,
+        "all_features": [
+          "income",
+          "name_email_similarity",
+          "prev_address_months_count",
+          "current_address_months_count",
+          "customer_age",
+          "days_since_request",
+          "intended_balcon_amount",
+          "payment_type",
+          "zip_count_4w",
+          "velocity_6h",
+          "velocity_24h",
+          "velocity_4w",
+          "bank_branch_count_8w",
+          "date_of_birth_distinct_emails_4w",
+          "employment_status",
+          "credit_risk_score",
+          "email_is_free",
+          "housing_status",
+          "phone_home_valid",
+          "phone_mobile_valid",
+          "bank_months_count",
+          "has_other_cards",
+          "proposed_credit_limit",
+          "foreign_request",
+          "source",
+          "session_length_in_minutes",
+          "device_os",
+          "keep_alive_session",
+          "device_distinct_emails_8w",
+          "device_fraud_count",
+          "month",
+          "x1",
+          "x2"
+        ],
+        "stable_features": [
+          "income",
+          "name_email_similarity",
+          "prev_address_months_count",
+          "current_address_months_count",
+          "customer_age",
+          "days_since_request",
+          "intended_balcon_amount",
+          "payment_type",
+          "bank_branch_count_8w",
+          "employment_status",
+          "credit_risk_score",
+          "email_is_free",
+          "housing_status",
+          "phone_home_valid",
+          "phone_mobile_valid",
+          "bank_months_count",
+          "has_other_cards",
+          "proposed_credit_limit",
+          "foreign_request",
+          "source",
+          "session_length_in_minutes",
+          "device_os",
+          "keep_alive_session",
+          "device_distinct_emails_8w",
+          "device_fraud_count",
+          "x1",
+          "x2"
+        ],
+        "dropped_features": [
+          "date_of_birth_distinct_emails_4w",
+          "month",
+          "velocity_24h",
+          "velocity_4w",
+          "velocity_6h",
+          "zip_count_4w"
+        ],
+        "provenance_policy": "reject anonymous x<number> fields without semantics",
+        "untrusted_features": [
+          "x1",
+          "x2"
+        ],
+        "psi": {
+          "bank_branch_count_8w": 0.029191,
+          "bank_months_count": 0.01147,
+          "credit_risk_score": 0.162108,
+          "current_address_months_count": 0.02384,
+          "customer_age": 0.006061,
+          "date_of_birth_distinct_emails_4w": 0.222042,
+          "days_since_request": 0.016703,
+          "device_distinct_emails_8w": 0.002029,
+          "device_fraud_count": 0.0,
+          "device_os": 0.005702,
+          "email_is_free": 0.010361,
+          "employment_status": 0.010894,
+          "foreign_request": 0.000191,
+          "has_other_cards": 3e-06,
+          "housing_status": 0.012054,
+          "income": 0.062005,
+          "intended_balcon_amount": 0.003599,
+          "keep_alive_session": 0.009425,
+          "month": 8.325383,
+          "name_email_similarity": 0.017921,
+          "payment_type": 0.00627,
+          "phone_home_valid": 0.009049,
+          "phone_mobile_valid": 0.008541,
+          "prev_address_months_count": 0.01031,
+          "proposed_credit_limit": 0.049687,
+          "session_length_in_minutes": 0.025526,
+          "source": 0.000511,
+          "velocity_24h": 1.330427,
+          "velocity_4w": 2.609798,
+          "velocity_6h": 0.738363,
+          "x1": 0.00035,
+          "x2": 0.00024,
+          "zip_count_4w": 0.318893
+        },
+        "uses_test_labels": false
+      },
+      "test_metrics": {
+        "b0_onehot_logistic": {
+          "tpr_at_5pct_fpr": 0.300151,
+          "average_precision": 0.055868,
+          "roc_auc": 0.789802,
+          "threshold": 0.92260317,
+          "age_fpr": {
+            "ratio": 0.241907,
+            "younger": 0.019351,
+            "older": 0.079994
+          }
+        },
+        "b1_lightgbm": {
+          "tpr_at_5pct_fpr": 0.337858,
+          "average_precision": 0.064916,
+          "roc_auc": 0.776164,
+          "threshold": 0.02661248,
+          "age_fpr": {
+            "ratio": 0.195714,
+            "younger": 0.016213,
+            "older": 0.082842
+          }
+        },
+        "b2_catboost": {
+          "tpr_at_5pct_fpr": 0.346908,
+          "average_precision": 0.064435,
+          "roc_auc": 0.727643,
+          "threshold": 0.02856922,
+          "age_fpr": {
+            "ratio": 0.212538,
+            "younger": 0.017347,
+            "older": 0.081617
+          }
+        },
+        "proposed_unlabeled_drift_gated_lightgbm": {
+          "tpr_at_5pct_fpr": 0.340121,
+          "average_precision": 0.064391,
+          "roc_auc": 0.764412,
+          "threshold": 0.02322501,
+          "age_fpr": {
+            "ratio": 0.174582,
+            "younger": 0.014742,
+            "older": 0.08444
+          }
+        },
+        "proposed_provenance_gated_lightgbm": {
+          "tpr_at_5pct_fpr": 0.49359,
+          "average_precision": 0.145724,
+          "roc_auc": 0.88084,
+          "threshold": 0.04169925,
+          "age_fpr": {
+            "ratio": 0.897726,
+            "younger": 0.047092,
+            "older": 0.052457
+          }
+        }
+      },
+      "wall_seconds": 287.528
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.3.2-arm64-arm-64bit",
+    "seed": 20261122
+  }
+}

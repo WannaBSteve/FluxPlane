@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title desc">
+  <title id="title">FluxECR evidence-centric multimodal reasoning and adaptive serving</title>
+  <desc id="desc">An end-to-end architecture from multimodal inputs through provenance filtering, parallel evidence agents, class-wise arbitration, utility-based model use, auditable outputs and freshness-constrained scheduling, followed by a comparison with early fusion, RAG-only and mixture-of-experts paradigms.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#536170"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#7655A6"/>
+    </marker>
+    <style>
+      .title { font: 700 30px Arial, Helvetica, sans-serif; fill: #17212B; letter-spacing: .2px; }
+      .subtitle { font: 400 15px Arial, Helvetica, sans-serif; fill: #5B6875; }
+      .section { font: 700 15px Arial, Helvetica, sans-serif; fill: #26323D; letter-spacing: 1.2px; }
+      .boxTitle { font: 700 18px Arial, Helvetica, sans-serif; fill: #17212B; }
+      .boxSub { font: 600 13px Arial, Helvetica, sans-serif; fill: #42505D; }
+      .body { font: 400 14px Arial, Helvetica, sans-serif; fill: #34414D; }
+      .small { font: 400 12px Arial, Helvetica, sans-serif; fill: #536170; }
+      .tiny { font: 400 11px Arial, Helvetica, sans-serif; fill: #65727D; }
+      .metric { font: 700 12px Arial, Helvetica, sans-serif; fill: #146B5F; }
+      .num { font: 700 19px Arial, Helvetica, sans-serif; fill: #17212B; }
+      .mainArrow { fill: none; stroke: #536170; stroke-width: 2.2; marker-end: url(#arrow); }
+      .softArrow { fill: none; stroke: #84909A; stroke-width: 1.6; stroke-dasharray: 5 5; marker-end: url(#arrow); }
+      .purpleArrow { fill: none; stroke: #7655A6; stroke-width: 2; marker-end: url(#arrowPurple); }
+      .divider { stroke: #D8DEE4; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1200" fill="#FFFFFF"/>
+  <text x="40" y="48" class="title">FluxECR: evidence-centric multimodal reasoning and adaptive serving</text>
+  <text x="40" y="76" class="subtitle">Preserve heterogeneous evidence, arbitrate by target class, and serve predictions without sacrificing feature freshness.</text>
+
+  <text x="40" y="115" class="section">A. EVIDENCE PLANE</text>
+  <rect x="30" y="130" width="1740" height="550" rx="16" fill="#FAFBFC" stroke="#D8DEE4"/>
+
+  <!-- Inputs -->
+  <rect x="55" y="175" width="205" height="410" rx="14" fill="#EAF2FB" stroke="#2F6B9A" stroke-width="1.6"/>
+  <text x="78" y="212" class="boxTitle">Multimodal input</text>
+  <text x="78" y="237" class="boxSub">available at decision time</text>
+  <rect x="78" y="270" width="159" height="62" rx="10" fill="#FFFFFF" stroke="#9CB9D2"/>
+  <text x="97" y="296" class="body">Narrative text</text>
+  <text x="97" y="316" class="small">complaint · issue · entity</text>
+  <rect x="78" y="348" width="159" height="62" rx="10" fill="#FFFFFF" stroke="#9CB9D2"/>
+  <text x="97" y="374" class="body">Structured fields</text>
+  <text x="97" y="394" class="small">product · channel · time</text>
+  <rect x="78" y="426" width="159" height="62" rx="10" fill="#FFFFFF" stroke="#9CB9D2"/>
+  <text x="97" y="452" class="body">Feature updates</text>
+  <text x="97" y="472" class="small">versions · event streams</text>
+  <line x1="78" y1="512" x2="237" y2="512" class="divider"/>
+  <text x="78" y="538" class="small">Same interface for public</text>
+  <text x="78" y="557" class="small">and private data sources</text>
+
+  <!-- Provenance gate -->
+  <path d="M260 380 L298 380" class="mainArrow"/>
+  <rect x="305" y="175" width="205" height="410" rx="14" fill="#E7F6F2" stroke="#21867A" stroke-width="1.6"/>
+  <text x="329" y="212" class="boxTitle">Provenance gate</text>
+  <text x="329" y="237" class="boxSub">what may become evidence?</text>
+  <circle cx="339" cy="282" r="5" fill="#21867A"/>
+  <text x="354" y="287" class="body">source identity</text>
+  <circle cx="339" cy="322" r="5" fill="#21867A"/>
+  <text x="354" y="327" class="body">field semantics</text>
+  <circle cx="339" cy="362" r="5" fill="#21867A"/>
+  <text x="354" y="367" class="body">availability time</text>
+  <circle cx="339" cy="402" r="5" fill="#21867A"/>
+  <text x="354" y="407" class="body">version &amp; freshness</text>
+  <rect x="329" y="447" width="157" height="64" rx="9" fill="#FFFFFF" stroke="#8BC5BA"/>
+  <text x="344" y="472" class="body">Reject leakage and</text>
+  <text x="344" y="493" class="body">unregistered fields</text>
+  <rect x="329" y="528" width="157" height="36" rx="18" fill="#D3EFE9"/>
+  <text x="345" y="551" class="metric">BAF: .3469 → .4936</text>
+
+  <!-- Evidence agents -->
+  <path d="M510 380 L548 380" class="mainArrow"/>
+  <rect x="555" y="152" width="325" height="475" rx="14" fill="#F3F7FA" stroke="#637C8F" stroke-width="1.6"/>
+  <text x="579" y="188" class="boxTitle">Parallel evidence agents</text>
+  <text x="579" y="213" class="boxSub">different inductive biases, one contract</text>
+
+  <rect x="579" y="239" width="277" height="72" rx="10" fill="#EAF2FB" stroke="#84AACA"/>
+  <text x="596" y="266" class="boxSub">Semantic agent</text>
+  <text x="596" y="289" class="body">Frozen E5 · field-level embeddings</text>
+
+  <rect x="579" y="324" width="277" height="72" rx="10" fill="#FFF3E2" stroke="#D39A45"/>
+  <text x="596" y="351" class="boxSub">Structure agent</text>
+  <text x="596" y="374" class="body">CatBoost · interactions &amp; missingness</text>
+
+  <rect x="579" y="409" width="277" height="82" rx="10" fill="#E7F6F2" stroke="#57A99C"/>
+  <text x="596" y="436" class="boxSub">Hybrid Case Memory</text>
+  <text x="596" y="459" class="body">lexical .50 · semantic .30</text>
+  <text x="596" y="478" class="small">structure .20 · training-only index</text>
+
+  <rect x="579" y="504" width="277" height="72" rx="10" fill="#F7F2E8" stroke="#A28B5C"/>
+  <text x="596" y="531" class="boxSub">Field-rule agent</text>
+  <text x="596" y="554" class="body">stable conditional distributions</text>
+  <text x="579" y="606" class="small">Each agent returns p(y|x), support and trace.</text>
+
+  <!-- Evidence ledger -->
+  <path d="M880 380 L918 380" class="mainArrow"/>
+  <rect x="925" y="175" width="190" height="410" rx="14" fill="#F0F7F6" stroke="#4A9489" stroke-width="1.6"/>
+  <text x="949" y="212" class="boxTitle">Evidence ledger</text>
+  <text x="949" y="237" class="boxSub">typed, inspectable signals</text>
+  <rect x="949" y="267" width="142" height="48" rx="8" fill="#FFFFFF" stroke="#A8CCC6"/>
+  <text x="966" y="297" class="body">class distribution</text>
+  <rect x="949" y="329" width="142" height="48" rx="8" fill="#FFFFFF" stroke="#A8CCC6"/>
+  <text x="966" y="359" class="body">retrieval support</text>
+  <rect x="949" y="391" width="142" height="48" rx="8" fill="#FFFFFF" stroke="#A8CCC6"/>
+  <text x="966" y="421" class="body">source reliability</text>
+  <rect x="949" y="453" width="142" height="48" rx="8" fill="#FFFFFF" stroke="#A8CCC6"/>
+  <text x="966" y="483" class="body">provenance trace</text>
+  <text x="949" y="535" class="small">No irreversible concat.</text>
+  <text x="949" y="555" class="small">Disagreement is retained.</text>
+
+  <!-- Arbiter -->
+  <path d="M1115 380 L1153 380" class="mainArrow"/>
+  <rect x="1160" y="175" width="230" height="410" rx="14" fill="#FFF1DC" stroke="#C77700" stroke-width="1.8"/>
+  <text x="1184" y="212" class="boxTitle">Class-wise arbiter</text>
+  <text x="1184" y="237" class="boxSub">who is reliable for this label?</text>
+  <rect x="1184" y="267" width="182" height="80" rx="10" fill="#FFFFFF" stroke="#E1B875"/>
+  <text x="1201" y="293" class="body">agent × class reliability</text>
+  <text x="1201" y="317" class="num">W<tspan baseline-shift="sub" font-size="12">agent,class</tspan></text>
+  <text x="1201" y="337" class="tiny">estimated on validation only</text>
+  <rect x="1184" y="363" width="182" height="87" rx="10" fill="#FFFFFF" stroke="#E1B875"/>
+  <text x="1201" y="390" class="body">conflict diagnostics</text>
+  <text x="1201" y="414" class="small">entropy · margin</text>
+  <text x="1201" y="433" class="small">JS disagreement · support</text>
+  <rect x="1184" y="466" width="182" height="73" rx="10" fill="#FBE4BD" stroke="#D79B38"/>
+  <text x="1201" y="493" class="boxSub">calibrated consensus</text>
+  <text x="1201" y="517" class="body">probability + decision bias</text>
+  <text x="1184" y="553" class="small">CFPB Macro-F1</text>
+  <text x="1184" y="574" class="metric">.4785 → .6547 (+36.8%)</text>
+
+  <!-- Utility action and output -->
+  <path d="M1390 380 L1428 380" class="mainArrow"/>
+  <rect x="1435" y="175" width="310" height="258" rx="14" fill="#F1ECFA" stroke="#7655A6" stroke-width="1.8"/>
+  <text x="1459" y="212" class="boxTitle">Utility action</text>
+  <text x="1459" y="237" class="boxSub">expected correction − cost − risk</text>
+  <rect x="1459" y="267" width="120" height="54" rx="9" fill="#FFFFFF" stroke="#B9A8D3"/>
+  <text x="1482" y="290" class="body">Accept local</text>
+  <text x="1482" y="308" class="small">fast path</text>
+  <rect x="1592" y="267" width="129" height="54" rx="9" fill="#FFFFFF" stroke="#B9A8D3"/>
+  <text x="1608" y="290" class="body">Ling + RAG</text>
+  <text x="1608" y="308" class="small">candidate expert</text>
+  <rect x="1459" y="339" width="262" height="55" rx="9" fill="#FBEAEC" stroke="#B5424A"/>
+  <text x="1480" y="363" class="boxSub">No-call / reject candidate</text>
+  <text x="1480" y="382" class="small">a first-class action, not an error</text>
+  <path d="M1579 294 L1590 294" class="purpleArrow"/>
+  <path d="M1590 321 C1590 333 1550 338 1550 338" class="softArrow"/>
+
+  <path d="M1590 433 L1590 466" class="mainArrow"/>
+  <rect x="1435" y="473" width="310" height="112" rx="14" fill="#E7F6F2" stroke="#21867A" stroke-width="1.6"/>
+  <text x="1459" y="507" class="boxTitle">Auditable output</text>
+  <text x="1459" y="532" class="body">prediction · confidence · evidence trace</text>
+  <text x="1459" y="555" class="body">source versions · disagreement · action</text>
+
+  <!-- Feedback -->
+  <path d="M1585 585 C1585 650 1015 660 1015 587" class="softArrow"/>
+  <text x="1190" y="650" class="small">observed outcomes update reliability, never rewrite provenance</text>
+
+  <!-- Serving plane -->
+  <text x="40" y="722" class="section">B. SERVING PLANE</text>
+  <rect x="30" y="738" width="1740" height="194" rx="16" fill="#F4F6F8" stroke="#CAD1D8"/>
+
+  <rect x="60" y="783" width="220" height="100" rx="12" fill="#EAF2FB" stroke="#6E98BB"/>
+  <text x="83" y="816" class="boxTitle">Query queue</text>
+  <text x="83" y="842" class="body">latency · cost · priority</text>
+  <text x="83" y="864" class="small">foreground inference</text>
+
+  <rect x="315" y="783" width="220" height="100" rx="12" fill="#E7F6F2" stroke="#57A99C"/>
+  <text x="338" y="816" class="boxTitle">Refresh queue</text>
+  <text x="338" y="842" class="body">deadline · dependency</text>
+  <text x="338" y="864" class="small">feature and index updates</text>
+
+  <path d="M280 815 L296 815 L296 755 L575 755 L575 800 L598 800" class="mainArrow"/>
+  <path d="M535 850 L598 850" class="mainArrow"/>
+  <rect x="600" y="765" width="340" height="136" rx="13" fill="#FFF1DC" stroke="#C77700" stroke-width="1.7"/>
+  <text x="625" y="795" class="boxTitle">Deadline-constrained Nash scheduler</text>
+  <text x="625" y="819" class="small">2 log(query) + 2 log(freshness)</text>
+  <text x="625" y="839" class="small">+ log(throughput)</text>
+  <text x="625" y="864" class="body">refresh-deadline rate ≥ 0.99</text>
+  <text x="625" y="887" class="tiny">borrow only while the constraint remains feasible</text>
+
+  <path d="M940 833 L987 833" class="mainArrow"/>
+  <rect x="995" y="783" width="270" height="100" rx="12" fill="#FFFFFF" stroke="#7A8792"/>
+  <text x="1019" y="816" class="boxTitle">Shared worker pool</text>
+  <text x="1019" y="842" class="body">local experts · retrieval · API</text>
+  <text x="1019" y="864" class="small">same reserved CPU in both policies</text>
+
+  <path d="M1265 833 L1312 833" class="mainArrow"/>
+  <rect x="1320" y="765" width="415" height="136" rx="13" fill="#E7F6F2" stroke="#21867A" stroke-width="1.7"/>
+  <text x="1345" y="799" class="boxTitle">Measured on the 100k mixed workload</text>
+  <text x="1345" y="831" class="num">−29.6% mean</text>
+  <text x="1510" y="831" class="num">−40.1% p95</text>
+  <text x="1345" y="861" class="num">+64.1% throughput</text>
+  <text x="1575" y="861" class="metric">36/36 on time</text>
+  <text x="1345" y="885" class="small">fixed pools → dynamic idle-capacity borrowing</text>
+
+  <!-- Paradigm comparison -->
+  <text x="40" y="974" class="section">C. WHERE FLUXECR DIFFERS</text>
+
+  <rect x="40" y="995" width="395" height="160" rx="13" fill="#FAFBFC" stroke="#C8D0D7"/>
+  <text x="63" y="1028" class="boxTitle">Early fusion</text>
+  <rect x="63" y="1050" width="83" height="39" rx="7" fill="#EAF2FB" stroke="#9CB9D2"/>
+  <text x="82" y="1075" class="small">all fields</text>
+  <path d="M146 1069 L195 1069" class="mainArrow"/>
+  <rect x="202" y="1050" width="92" height="39" rx="7" fill="#FFF3E2" stroke="#D39A45"/>
+  <text x="220" y="1075" class="small">one model</text>
+  <path d="M294 1069 L331 1069" class="mainArrow"/>
+  <text x="63" y="1120" class="small">Simple, but provenance and disagreement disappear.</text>
+  <text x="63" y="1139" class="tiny">concat → single decision surface</text>
+
+  <rect x="465" y="995" width="395" height="160" rx="13" fill="#FAFBFC" stroke="#C8D0D7"/>
+  <text x="488" y="1028" class="boxTitle">RAG-only</text>
+  <rect x="488" y="1050" width="78" height="39" rx="7" fill="#E7F6F2" stroke="#57A99C"/>
+  <text x="504" y="1075" class="small">retrieve</text>
+  <path d="M566 1069 L617 1069" class="mainArrow"/>
+  <rect x="624" y="1050" width="82" height="39" rx="7" fill="#F1ECFA" stroke="#9C87BE"/>
+  <text x="648" y="1075" class="small">LLM</text>
+  <path d="M706 1069 L743 1069" class="mainArrow"/>
+  <text x="488" y="1120" class="small">Adds context, but the generator remains the authority.</text>
+  <text x="488" y="1139" class="tiny">retrieval → answer</text>
+
+  <rect x="890" y="995" width="395" height="160" rx="13" fill="#FAFBFC" stroke="#C8D0D7"/>
+  <text x="913" y="1028" class="boxTitle">Sparse MoE / model router</text>
+  <rect x="913" y="1050" width="68" height="39" rx="7" fill="#FFF1DC" stroke="#D39A45"/>
+  <text x="930" y="1075" class="small">gate</text>
+  <path d="M981 1069 L1027 1069" class="mainArrow"/>
+  <rect x="1034" y="1040" width="76" height="29" rx="7" fill="#EAF2FB" stroke="#9CB9D2"/>
+  <text x="1053" y="1060" class="tiny">expert 1</text>
+  <rect x="1034" y="1075" width="76" height="29" rx="7" fill="#F1ECFA" stroke="#9C87BE"/>
+  <text x="1053" y="1095" class="tiny">expert k</text>
+  <path d="M1110 1069 L1160 1069" class="mainArrow"/>
+  <text x="913" y="1120" class="small">Efficient selection, but complementary evidence is lost.</text>
+  <text x="913" y="1139" class="tiny">gate → top-k expert</text>
+
+  <rect x="1315" y="995" width="445" height="160" rx="13" fill="#F0F7F6" stroke="#21867A" stroke-width="2"/>
+  <text x="1338" y="1028" class="boxTitle">FluxECR</text>
+  <rect x="1338" y="1050" width="92" height="39" rx="7" fill="#E7F6F2" stroke="#57A99C"/>
+  <text x="1353" y="1075" class="small">evidence × n</text>
+  <path d="M1430 1069 L1472 1069" class="mainArrow"/>
+  <rect x="1479" y="1050" width="101" height="39" rx="7" fill="#FFF1DC" stroke="#D39A45"/>
+  <text x="1492" y="1075" class="small">class arbiter</text>
+  <path d="M1580 1069 L1622 1069" class="mainArrow"/>
+  <rect x="1629" y="1050" width="105" height="39" rx="7" fill="#F1ECFA" stroke="#9C87BE"/>
+  <text x="1641" y="1075" class="small">utility action</text>
+  <text x="1338" y="1120" class="small">Preserves conflicts, may reject the expensive expert,</text>
+  <text x="1338" y="1139" class="small">and couples inference to evidence freshness.</text>
+</svg>

@@ -74,20 +74,32 @@ async def request_plan(platform: Platform, question: str, catalog: list[dict]) -
         "Use LIMIT 100 for detail listings. SQL must be a single SELECT or WITH query."
     )
     try:
+        request_body = {
+            "model": config.analysis_model,
+            "temperature": 0,
+            "max_tokens": 3000,
+            "messages": [
+                {"role": "system", "content": prompt},
+                {"role": "user", "content": json.dumps(
+                    {"question": question, "catalog": catalog}, ensure_ascii=False
+                )},
+            ],
+        }
+        if config.analysis_response_format:
+            request_body["response_format"] = {"type": "json_object"}
         async with httpx.AsyncClient(timeout=config.analysis_timeout_seconds) as client:
             response = await client.post(
                 config.analysis_base_url.rstrip("/") + "/chat/completions",
                 headers={"Authorization": f"Bearer {config.analysis_api_key}"}
                 if config.analysis_api_key else {},
-                json={"model": config.analysis_model, "temperature": 0,
-                      "max_tokens": 3000, "response_format": {"type": "json_object"},
-                      "messages": [{"role": "system", "content": prompt},
-                                   {"role": "user", "content": json.dumps(
-                                       {"question": question, "catalog": catalog},
-                                       ensure_ascii=False)}]},
+                json=request_body,
             )
             response.raise_for_status()
-            return ModelPlan.model_validate_json(response.json()["choices"][0]["message"]["content"])
+            content = response.json()["choices"][0]["message"]["content"].strip()
+            if content.startswith("```") and content.endswith("```"):
+                lines = content.splitlines()
+                content = "\n".join(lines[1:-1]).strip()
+            return ModelPlan.model_validate_json(content)
     except (httpx.HTTPError, KeyError, IndexError, TypeError, ValueError, ValidationError) as exc:
         # Provider error bodies can contain request content or credentials.
         raise HTTPException(502, "模型未返回可用的分析计划，请检查服务配置或稍后重试。") from exc

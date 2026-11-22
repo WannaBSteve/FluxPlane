@@ -22,7 +22,14 @@ FLUXPLANE_ANALYSIS_BASE_URL=https://your-provider.example/v1
 FLUXPLANE_ANALYSIS_MODEL=your-model-name
 FLUXPLANE_ANALYSIS_API_KEY=your-provider-key
 FLUXPLANE_ANALYSIS_TIMEOUT_SECONDS=60
+# 仅当服务明确支持 OpenAI response_format 时开启
+FLUXPLANE_ANALYSIS_RESPONSE_FORMAT=false
 ```
+
+例如 AntChat 主站配置为 `FLUXPLANE_ANALYSIS_BASE_URL=https://antchat.alipay.com/v1`、
+`FLUXPLANE_ANALYSIS_MODEL=Ling-3.1-flash`。灰度环境使用
+`https://antchat-gray.alipay.com/v1`。其基础接口文档未声明 `response_format`，因此保持上面的
+`false`；模型返回 Markdown JSON 代码块时，服务会先移除代码块再进行严格字段校验。
 
 Compose 部署将这些值写入本机 `.env` 后，重建 API 与前端：
 

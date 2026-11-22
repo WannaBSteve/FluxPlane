@@ -1,0 +1,268 @@
+{
+  "schema_version": 2,
+  "experiment": "cfpb_response_agentic_fusion",
+  "protocol": {
+    "identity": "cfpb_response_agentic_fusion",
+    "research_role": "text-tabular feature fusion and agentic decision quality",
+    "task": "Predict the company's eventual complaint response from information available before that response is produced.",
+    "target": "Company response to consumer",
+    "split": "chronological 60/20/20 train/validation/test over all selected records",
+    "metrics": [
+      {
+        "name": "macro_average_precision",
+        "direction": "maximize",
+        "role": "primary",
+        "rationale": "Risk-sensitive one-vs-rest ranking quality that does not hide rare response classes."
+      },
+      {
+        "name": "macro_ovr_auroc",
+        "direction": "maximize",
+        "role": "secondary",
+        "rationale": "Comparable with the AUROC protocol used by recent text-tabular benchmarks."
+      },
+      {
+        "name": "macro_f1",
+        "direction": "maximize",
+        "role": "secondary",
+        "rationale": "Measures the final hard decision equally across response classes."
+      },
+      {
+        "name": "expected_calibration_error",
+        "direction": "minimize",
+        "role": "diagnostic",
+        "rationale": "Determines whether confidence is useful for selective LLM escalation."
+      }
+    ],
+    "baselines": [
+      {
+        "identity": "b0_majority",
+        "family": "constant",
+        "modalities": [
+          "label_prior"
+        ],
+        "description": "Most frequent training response; sanity check only.",
+        "comparison_role": "sanity"
+      },
+      {
+        "identity": "b1_tfidf_lr",
+        "family": "linear",
+        "modalities": [
+          "text"
+        ],
+        "description": "Word 1-2 gram TF-IDF with class-balanced logistic regression.",
+        "comparison_role": "required"
+      },
+      {
+        "identity": "b2_structured_lr",
+        "family": "linear",
+        "modalities": [
+          "structured"
+        ],
+        "description": "One-hot pre-decision fields with class-balanced logistic regression.",
+        "comparison_role": "required"
+      },
+      {
+        "identity": "b3_early_fusion_lr",
+        "family": "linear",
+        "modalities": [
+          "text",
+          "structured"
+        ],
+        "description": "Single classifier over concatenated text and structured features.",
+        "comparison_role": "required"
+      },
+      {
+        "identity": "b4_late_fusion",
+        "family": "ensemble",
+        "modalities": [
+          "text",
+          "structured"
+        ],
+        "description": "Validation-selected probability fusion of the two unimodal agents.",
+        "comparison_role": "required"
+      },
+      {
+        "identity": "b5_all_ling",
+        "family": "large_model",
+        "modalities": [
+          "text",
+          "structured",
+          "retrieval"
+        ],
+        "description": "Ling judges every record; quality upper bound, not the gain denominator.",
+        "comparison_role": "upper_bound"
+      }
+    ],
+    "success_criteria": [
+      "The proposed method must beat both unimodal baselines and early fusion.",
+      "Removing text, structured evidence, or retrieval must each be reported.",
+      "The 30% claim uses relative macro-average-precision gain over B1 and is also reported against the strongest required baseline.",
+      "All methods use the same complete chronological test partition."
+    ],
+    "public_anchor": "MulTaBench extended Consumer Complaints protocol (NeurIPS 2026)",
+    "primary_metric": "macro_average_precision"
+  },
+  "input": {
+    "file": "CCDB_Export_15_January_2026_through_February_2026.zip",
+    "sha256": "437eee7adcc3e4342d1eafd8d716c4ef149e29c6a68c5ce3c379d1dc82c14b22",
+    "total_rows": 1038383,
+    "usable_rows": 34351,
+    "selected_labels": [
+      "Closed with explanation",
+      "Closed with non-monetary relief",
+      "Closed with monetary relief",
+      "Untimely response"
+    ],
+    "evaluated_rows": 34351,
+    "feature_policy": "pre-response narrative, issue, sub-issue, company, product, sub-product, state, tags, channel, received year/month",
+    "blocked_post_outcome_fields": [
+      "Company public response",
+      "Timely response?"
+    ]
+  },
+  "split": {
+    "method": "complete_chronological_60_20_20",
+    "train": 20610,
+    "validation": 6870,
+    "test": 6871,
+    "train_end": "2026-01-29",
+    "validation_end": "2026-02-15",
+    "test_end": "2026-02-28"
+  },
+  "selection": {
+    "late_fusion_text_weight": 1.0,
+    "late_fusion_validation_macro_ap": 0.559915,
+    "agent_reliability_weights": {
+      "joint_local": 0.4,
+      "case_memory": 0.15,
+      "field_rules": 0.45
+    },
+    "agentic_validation_macro_ap": 0.589521,
+    "classwise_validation_macro_ap": 0.624519,
+    "classwise_reliability": {
+      "joint_local": {
+        "Closed with explanation": 0.2,
+        "Closed with monetary relief": 0.0,
+        "Closed with non-monetary relief": 0.1,
+        "Untimely response": 0.0
+      },
+      "case_memory": {
+        "Closed with explanation": 0.0,
+        "Closed with monetary relief": 0.2,
+        "Closed with non-monetary relief": 0.1,
+        "Untimely response": 0.1
+      },
+      "field_rules": {
+        "Closed with explanation": 0.8,
+        "Closed with monetary relief": 0.8,
+        "Closed with non-monetary relief": 0.8,
+        "Untimely response": 0.9
+      }
+    }
+  },
+  "test_metrics": {
+    "b0_majority": {
+      "macro_average_precision": 0.25,
+      "macro_ovr_auroc": 0.5,
+      "macro_f1": 0.224653,
+      "weighted_f1": 0.733172,
+      "accuracy": 0.815893,
+      "log_loss": 0.647506,
+      "expected_calibration_error": 0.01794
+    },
+    "b1_tfidf_lr": {
+      "macro_average_precision": 0.537388,
+      "macro_ovr_auroc": 0.860033,
+      "macro_f1": 0.478547,
+      "weighted_f1": 0.630847,
+      "accuracy": 0.570805,
+      "log_loss": 1.040923,
+      "expected_calibration_error": 0.146136
+    },
+    "b2_structured_lr": {
+      "macro_average_precision": 0.345888,
+      "macro_ovr_auroc": 0.713395,
+      "macro_f1": 0.321429,
+      "weighted_f1": 0.563884,
+      "accuracy": 0.513171,
+      "log_loss": 1.981088,
+      "expected_calibration_error": 0.350501
+    },
+    "b3_early_fusion_lr": {
+      "macro_average_precision": 0.54451,
+      "macro_ovr_auroc": 0.840486,
+      "macro_f1": 0.408931,
+      "weighted_f1": 0.612838,
+      "accuracy": 0.545044,
+      "log_loss": 1.661287,
+      "expected_calibration_error": 0.288518
+    },
+    "b4_late_fusion": {
+      "macro_average_precision": 0.537388,
+      "macro_ovr_auroc": 0.860033,
+      "macro_f1": 0.478547,
+      "weighted_f1": 0.630847,
+      "accuracy": 0.570805,
+      "log_loss": 1.040923,
+      "expected_calibration_error": 0.146136
+    },
+    "a1_case_retrieval": {
+      "macro_average_precision": 0.53033,
+      "macro_ovr_auroc": 0.816512,
+      "macro_f1": 0.395018,
+      "weighted_f1": 0.777458,
+      "accuracy": 0.828264,
+      "log_loss": 0.498663,
+      "expected_calibration_error": 0.027504
+    },
+    "a2_field_rule_agent": {
+      "macro_average_precision": 0.592632,
+      "macro_ovr_auroc": 0.884303,
+      "macro_f1": 0.224653,
+      "weighted_f1": 0.733172,
+      "accuracy": 0.815893,
+      "log_loss": 0.49754,
+      "expected_calibration_error": 0.095146
+    },
+    "a3_global_evidence_consensus": {
+      "macro_average_precision": 0.582699,
+      "macro_ovr_auroc": 0.866789,
+      "macro_f1": 0.544783,
+      "weighted_f1": 0.782489,
+      "accuracy": 0.761898,
+      "log_loss": 0.601006,
+      "expected_calibration_error": 0.026066
+    },
+    "proposed_classwise_evidence_consensus": {
+      "macro_average_precision": 0.617613,
+      "macro_ovr_auroc": 0.892935,
+      "macro_f1": 0.251702,
+      "weighted_f1": 0.739692,
+      "accuracy": 0.818658,
+      "log_loss": 0.480708,
+      "expected_calibration_error": 0.098482
+    }
+  },
+  "headline": {
+    "primary_metric": "macro_average_precision",
+    "strongest_required_baseline": "b3_early_fusion_lr",
+    "relative_gain_vs_b1_pct": 14.929,
+    "relative_gain_vs_strongest_baseline_pct": 13.425,
+    "thirty_pct_vs_b1_met": false
+  },
+  "agent_diagnostics": {
+    "validation_mean_disagreement": 0.189726,
+    "test_mean_disagreement": 0.210076,
+    "validation_mean_retrieval_support": 0.351817,
+    "test_mean_retrieval_support": 0.337174,
+    "validation_mean_rule_support": 1.0,
+    "test_mean_rule_support": 1.0
+  },
+  "environment": {
+    "python": "3.12.14",
+    "scikit_learn": "1.9.1",
+    "platform": "macOS-26.3.2-arm64-arm-64bit",
+    "seed": 20261122,
+    "wall_seconds": 146.66
+  }
+}

@@ -25,6 +25,13 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1"]
+experiments = ["numpy>=2,<3", "pandas>=2.2,<4", "scikit-learn>=1.5,<2"]
+embedding-experiments = [
+  "sentence-transformers>=3,<6",
+  "catboost>=1.2,<2",
+  "lightgbm>=4,<5",
+  "multabench>=0.2.1,<0.3",
+]
 
 [project.scripts]
 fluxplane = "fluxplane.cli:main"
@@ -42,4 +49,3 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-

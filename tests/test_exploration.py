@@ -125,14 +125,18 @@ def test_provider_request_and_errors_do_not_expose_credentials(catalog, monkeypa
         assert request.url.path == "/v1/chat/completions"
         assert request.headers["Authorization"] == "Bearer private-provider-key"
         sent = json.loads(request.content)
+        assert "response_format" not in sent
         context = json.loads(sent["messages"][1]["content"])
         assert set(context["catalog"][0]) == {"name", "fields", "definition"}
         assert "private-provider-key" not in request.content.decode()
         if not valid:
             return httpx.Response(401, text="private-provider-key rejected")
-        return httpx.Response(200, json={"choices": [{"message": {"content": json.dumps({
+        content = json.dumps({
             "summary": "总销售额", "sql": "SELECT SUM(amount) FROM sales", "assumptions": []
-        })}}]})
+        })
+        return httpx.Response(200, json={"choices": [{"message": {
+            "content": f"```json\n{content}\n```",
+        }}]})
 
     monkeypatch.setattr("fluxplane.api.exploration.httpx.AsyncClient", lambda **kwargs:
                         original_client(transport=httpx.MockTransport(provider), **kwargs))

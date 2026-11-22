@@ -48,6 +48,8 @@ def main() -> None:
     for mode in modes:
         runs = [result for result in results if result["mode"] == mode]
         summary[mode] = {
+            "query_mean_median_ms": round(statistics.median(
+                result["query_mean_ms"] for result in runs), 2),
             "query_p95_median_ms": round(statistics.median(
                 result["query_p95_ms"] for result in runs), 2),
             "late_feature_deadline_hits": sum(

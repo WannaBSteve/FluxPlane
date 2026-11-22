@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "experiment": "cfpb_response_ling_evidence_adjudication",
+  "track": "pre_response_business_track",
+  "input": {
+    "file": "CCDB_Export_15_January_2026_through_February_2026.zip",
+    "usable_rows": 34351,
+    "evaluated_rows": 34351,
+    "labels": [
+      "Closed with explanation",
+      "Closed with non-monetary relief",
+      "Closed with monetary relief",
+      "Untimely response"
+    ]
+  },
+  "split": {
+    "method": "complete_chronological_60_20_20",
+    "train": 20610,
+    "validation": 6870,
+    "test": 6871
+  },
+  "test_metrics": {
+    "strong_local_classwise_e5_consensus": {
+      "macro_average_precision": 0.645104,
+      "macro_ovr_auroc": 0.91096,
+      "macro_f1": 0.652304,
+      "weighted_f1": 0.826952,
+      "accuracy": 0.816912,
+      "log_loss": 0.526699,
+      "expected_calibration_error": 0.121109
+    },
+    "ling_only": {
+      "macro_average_precision": 0.270621,
+      "macro_ovr_auroc": 0.532803,
+      "macro_f1": 0.313393,
+      "weighted_f1": 0.733506,
+      "accuracy": 0.765682,
+      "log_loss": 0.866445,
+      "expected_calibration_error": 0.167009
+    },
+    "ling_with_hybrid_rag": {
+      "macro_average_precision": 0.466945,
+      "macro_ovr_auroc": 0.788361,
+      "macro_f1": 0.50616,
+      "weighted_f1": 0.793922,
+      "accuracy": 0.807161,
+      "log_loss": 0.671824,
+      "expected_calibration_error": 0.100199
+    },
+    "heuristic_route_010pct": {
+      "macro_average_precision": 0.6137,
+      "macro_ovr_auroc": 0.891193,
+      "macro_f1": 0.635093,
+      "weighted_f1": 0.830488,
+      "accuracy": 0.827973,
+      "log_loss": 0.540632,
+      "expected_calibration_error": 0.122379
+    },
+    "learned_utility_route_010pct": {
+      "macro_average_precision": 0.64166,
+      "macro_ovr_auroc": 0.909634,
+      "macro_f1": 0.649931,
+      "weighted_f1": 0.823935,
+      "accuracy": 0.812109,
+      "log_loss": 0.534707,
+      "expected_calibration_error": 0.115662
+    },
+    "supervised_router_010pct": {
+      "macro_average_precision": 0.645348,
+      "macro_ovr_auroc": 0.910574,
+      "macro_f1": 0.652904,
+      "weighted_f1": 0.827706,
+      "accuracy": 0.81793,
+      "log_loss": 0.526149,
+      "expected_calibration_error": 0.122023
+    },
+    "heuristic_route_020pct": {
+      "macro_average_precision": 0.577946,
+      "macro_ovr_auroc": 0.864871,
+      "macro_f1": 0.609597,
+      "weighted_f1": 0.826621,
+      "accuracy": 0.829574,
+      "log_loss": 0.564174,
+      "expected_calibration_error": 0.118323
+    },
+    "learned_utility_route_020pct": {
+      "macro_average_precision": 0.64011,
+      "macro_ovr_auroc": 0.908668,
+      "macro_f1": 0.648656,
+      "weighted_f1": 0.820993,
+      "accuracy": 0.808034,
+      "log_loss": 0.541529,
+      "expected_calibration_error": 0.111384
+    },
+    "supervised_router_020pct": {
+      "macro_average_precision": 0.645348,
+      "macro_ovr_auroc": 0.910574,
+      "macro_f1": 0.652904,
+      "weighted_f1": 0.827706,
+      "accuracy": 0.81793,
+      "log_loss": 0.526149,
+      "expected_calibration_error": 0.122023
+    },
+    "heuristic_route_030pct": {
+      "macro_average_precision": 0.548496,
+      "macro_ovr_auroc": 0.841669,
+      "macro_f1": 0.580642,
+      "weighted_f1": 0.821011,
+      "accuracy": 0.828118,
+      "log_loss": 0.585579,
+      "expected_calibration_error": 0.11449
+    },
+    "learned_utility_route_030pct": {
+      "macro_average_precision": 0.639568,
+      "macro_ovr_auroc": 0.908426,
+      "macro_f1": 0.648277,
+      "weighted_f1": 0.820446,
+      "accuracy": 0.807306,
+      "log_loss": 0.54296,
+      "expected_calibration_error": 0.110788
+    },
+    "supervised_router_030pct": {
+      "macro_average_precision": 0.645296,
+      "macro_ovr_auroc": 0.910878,
+      "macro_f1": 0.652666,
+      "weighted_f1": 0.827406,
+      "accuracy": 0.817494,
+      "log_loss": 0.526261,
+      "expected_calibration_error": 0.121655
+    },
+    "heuristic_route_050pct": {
+      "macro_average_precision": 0.506995,
+      "macro_ovr_auroc": 0.804353,
+      "macro_f1": 0.550679,
+      "weighted_f1": 0.808935,
+      "accuracy": 0.819968,
+      "log_loss": 0.625214,
+      "expected_calibration_error": 0.106572
+    },
+    "learned_utility_route_050pct": {
+      "macro_average_precision": 0.639568,
+      "macro_ovr_auroc": 0.908426,
+      "macro_f1": 0.648277,
+      "weighted_f1": 0.820446,
+      "accuracy": 0.807306,
+      "log_loss": 0.54296,
+      "expected_calibration_error": 0.110788
+    },
+    "supervised_router_050pct": {
+      "macro_average_precision": 0.645113,
+      "macro_ovr_auroc": 0.910227,
+      "macro_f1": 0.652766,
+      "weighted_f1": 0.827664,
+      "accuracy": 0.81793,
+      "log_loss": 0.526365,
+      "expected_calibration_error": 0.122012
+    },
+    "heuristic_route_100pct": {
+      "macro_average_precision": 0.466945,
+      "macro_ovr_auroc": 0.788361,
+      "macro_f1": 0.50616,
+      "weighted_f1": 0.793922,
+      "accuracy": 0.807161,
+      "log_loss": 0.671824,
+      "expected_calibration_error": 0.100199
+    },
+    "learned_utility_route_100pct": {
+      "macro_average_precision": 0.639568,
+      "macro_ovr_auroc": 0.908426,
+      "macro_f1": 0.648277,
+      "weighted_f1": 0.820446,
+      "accuracy": 0.807306,
+      "log_loss": 0.54296,
+      "expected_calibration_error": 0.110788
+    },
+    "supervised_router_100pct": {
+      "macro_average_precision": 0.645104,
+      "macro_ovr_auroc": 0.91096,
+      "macro_f1": 0.652304,
+      "weighted_f1": 0.826952,
+      "accuracy": 0.816912,
+      "log_loss": 0.526699,
+      "expected_calibration_error": 0.121109
+    },
+    "oracle_correction_upper_bound": {
+      "macro_average_precision": 0.73479,
+      "macro_ovr_auroc": 0.929526,
+      "macro_f1": 0.765683,
+      "weighted_f1": 0.894008,
+      "accuracy": 0.896231,
+      "log_loss": 0.473172,
+      "expected_calibration_error": 0.196879
+    }
+  },
+  "route_curve": [
+    {
+      "rate": 0.1,
+      "heuristic": {
+        "routed": 687,
+        "metrics_key": "heuristic_route_010pct"
+      },
+      "learned_utility": {
+        "routed": 687,
+        "accepted": 72,
+        "metrics_key": "learned_utility_route_010pct"
+      },
+      "supervised_router": {
+        "routed": 687,
+        "accepted": 11,
+        "validation_oof_macro_f1": 0.66428,
+        "acceptance_threshold": 0.947478,
+        "metrics_key": "supervised_router_010pct"
+      }
+    },
+    {
+      "rate": 0.2,
+      "heuristic": {
+        "routed": 1374,
+        "metrics_key": "heuristic_route_020pct"
+      },
+      "learned_utility": {
+        "routed": 1374,
+        "accepted": 122,
+        "metrics_key": "learned_utility_route_020pct"
+      },
+      "supervised_router": {
+        "routed": 1374,
+        "accepted": 11,
+        "validation_oof_macro_f1": 0.66428,
+        "acceptance_threshold": 0.947443,
+        "metrics_key": "supervised_router_020pct"
+      }
+    },
+    {
+      "rate": 0.3,
+      "heuristic": {
+        "routed": 2061,
+        "metrics_key": "heuristic_route_030pct"
+      },
+      "learned_utility": {
+        "routed": 1928,
+        "accepted": 129,
+        "metrics_key": "learned_utility_route_030pct"
+      },
+      "supervised_router": {
+        "routed": 2061,
+        "accepted": 6,
+        "validation_oof_macro_f1": 0.664175,
+        "acceptance_threshold": 0.955486,
+        "metrics_key": "supervised_router_030pct"
+      }
+    },
+    {
+      "rate": 0.5,
+      "heuristic": {
+        "routed": 3435,
+        "metrics_key": "heuristic_route_050pct"
+      },
+      "learned_utility": {
+        "routed": 1928,
+        "accepted": 129,
+        "metrics_key": "learned_utility_route_050pct"
+      },
+      "supervised_router": {
+        "routed": 3435,
+        "accepted": 13,
+        "validation_oof_macro_f1": 0.664278,
+        "acceptance_threshold": 0.940376,
+        "metrics_key": "supervised_router_050pct"
+      }
+    },
+    {
+      "rate": 1.0,
+      "heuristic": {
+        "routed": 6871,
+        "metrics_key": "heuristic_route_100pct"
+      },
+      "learned_utility": {
+        "routed": 1928,
+        "accepted": 129,
+        "metrics_key": "learned_utility_route_100pct"
+      },
+      "supervised_router": {
+        "routed": 6871,
+        "accepted": 0,
+        "validation_oof_macro_f1": 0.662189,
+        "acceptance_threshold": 0.987236,
+        "metrics_key": "supervised_router_100pct"
+      }
+    }
+  ],
+  "routing_policy": {
+    "objective": "class-balanced validation correction utility",
+    "pre_call": {
+      "post_adjudication": false,
+      "prior_strength": 20.0,
+      "global_mean_utility": -0.21201554892792718,
+      "parent_groups": 4,
+      "cells": 81
+    },
+    "post_adjudication": {
+      "post_adjudication": true,
+      "prior_strength": 20.0,
+      "global_mean_utility": -0.21201554892792718,
+      "parent_groups": 12,
+      "cells": 96
+    },
+    "validation_rag_predictions": 6870,
+    "strong_local_validation_macro_f1": 0.662074,
+    "supervised": {
+      "training": "validation-only five-fold out-of-fold threshold selection",
+      "pre_call": {
+        "post_adjudication": false,
+        "model": "HistGradientBoostingClassifier",
+        "score": "P(benefit)-P(harm)",
+        "classes": [
+          "Closed with explanation",
+          "Closed with monetary relief",
+          "Closed with non-monetary relief",
+          "Untimely response"
+        ],
+        "outcomes": {
+          "harm": 588,
+          "neutral": 5718,
+          "benefit": 564
+        },
+        "iterations": 160,
+        "random_state": 20261122
+      },
+      "post_adjudication": {
+        "post_adjudication": true,
+        "model": "HistGradientBoostingClassifier",
+        "score": "P(benefit)-P(harm)",
+        "classes": [
+          "Closed with explanation",
+          "Closed with monetary relief",
+          "Closed with non-monetary relief",
+          "Untimely response"
+        ],
+        "outcomes": {
+          "harm": 588,
+          "neutral": 5718,
+          "benefit": 564
+        },
+        "iterations": 160,
+        "random_state": 20261122
+      },
+      "thresholds_by_rate": {
+        "0.100000": {
+          "threshold": 0.9474784551858166,
+          "macro_f1": 0.6642795580352803,
+          "routed": 687,
+          "accepted": 28
+        },
+        "0.200000": {
+          "threshold": 0.9474430187070952,
+          "macro_f1": 0.6642795580352803,
+          "routed": 1374,
+          "accepted": 28
+        },
+        "0.300000": {
+          "threshold": 0.9554857146859238,
+          "macro_f1": 0.6641754771031274,
+          "routed": 2061,
+          "accepted": 21
+        },
+        "0.500000": {
+          "threshold": 0.9403763857051322,
+          "macro_f1": 0.6642781717398074,
+          "routed": 3435,
+          "accepted": 35
+        },
+        "1.000000": {
+          "threshold": 0.9872358459436712,
+          "macro_f1": 0.6621887411710141,
+          "routed": 6870,
+          "accepted": 1
+        }
+      },
+      "artifact": "artifacts/cfpb-response-supervised-router-20261122.joblib"
+    }
+  },
+  "llm": {
+    "model": "Ling-3.1-flash",
+    "thinking_enabled": false,
+    "batch_size": 80,
+    "rag_batch_size": 30,
+    "workers": 8,
+    "ling_only_predictions_evaluated": 6871,
+    "validation_rag_predictions_evaluated": 6870,
+    "test_rag_predictions_evaluated": 6871,
+    "ling_only_api_calls_this_run": 0,
+    "validation_rag_api_calls_this_run": 0,
+    "test_rag_api_calls_this_run": 0,
+    "explanation_api_calls_this_run": 0,
+    "explanation_error": "RuntimeError",
+    "cache_hits": 20612,
+    "cache_misses": 0,
+    "request_latency_median_ms": null,
+    "request_latency_p95_ms": null,
+    "rag_net_corrections": -67,
+    "rag_corrected_local_errors": 545,
+    "rag_harmed_local_correct": 612
+  },
+  "explanation_examples": [
+    {
+      "record_id": "19515222",
+      "truth": "Closed with monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515270",
+      "truth": "Closed with explanation",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515299",
+      "truth": "Closed with explanation",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515303",
+      "truth": "Closed with non-monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515481",
+      "truth": "Closed with explanation",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515506",
+      "truth": "Closed with non-monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19515679",
+      "truth": "Closed with non-monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19516055",
+      "truth": "Closed with explanation",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19516080",
+      "truth": "Closed with monetary relief",
+      "prediction": "Closed with non-monetary relief",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19516082",
+      "truth": "Closed with non-monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19516097",
+      "truth": "Closed with non-monetary relief",
+      "prediction": "Closed with explanation",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    },
+    {
+      "record_id": "19516106",
+      "truth": "Closed with explanation",
+      "prediction": "Closed with non-monetary relief",
+      "evidence": [],
+      "rationale": "",
+      "counterfactual": ""
+    }
+  ],
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.3.2-arm64-arm-64bit",
+    "seed": 20261122,
+    "wall_seconds": 121.258
+  }
+}

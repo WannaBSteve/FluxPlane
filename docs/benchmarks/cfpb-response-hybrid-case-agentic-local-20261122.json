@@ -1,0 +1,512 @@
+{
+  "schema_version": 1,
+  "experiment": "cfpb_response_frozen_e5",
+  "track": "pre_response_business_track",
+  "input": {
+    "file": "CCDB_Export_15_January_2026_through_February_2026.zip",
+    "sha256": "437eee7adcc3e4342d1eafd8d716c4ef149e29c6a68c5ce3c379d1dc82c14b22",
+    "total_rows": 1038383,
+    "usable_rows": 34351,
+    "evaluated_rows": 34351,
+    "selected_labels": [
+      "Closed with explanation",
+      "Closed with non-monetary relief",
+      "Closed with monetary relief",
+      "Untimely response"
+    ],
+    "blocked_post_outcome_fields": [
+      "Company public response",
+      "Timely response?"
+    ]
+  },
+  "split": {
+    "method": "complete_chronological_60_20_20",
+    "train": 20610,
+    "validation": 6870,
+    "test": 6871
+  },
+  "representation": {
+    "model": "intfloat/e5-small-v2",
+    "fine_tuned": false,
+    "field_level_embeddings": [
+      "narrative",
+      "Issue",
+      "Sub-issue",
+      "Company"
+    ],
+    "pca_dimensions_per_field": 30,
+    "structured_fields": [
+      "Product",
+      "Sub-product",
+      "State",
+      "Tags",
+      "Submitted via",
+      "Received year",
+      "Received month"
+    ]
+  },
+  "selection": {
+    "classwise_reliability": {
+      "joint_e5": {
+        "Closed with explanation": 0.9,
+        "Closed with monetary relief": 0.3,
+        "Closed with non-monetary relief": 0.3,
+        "Untimely response": 0.4
+      },
+      "semantic_cases": {
+        "Closed with explanation": 0.0,
+        "Closed with monetary relief": 0.0,
+        "Closed with non-monetary relief": 0.1,
+        "Untimely response": 0.0
+      },
+      "rules": {
+        "Closed with explanation": 0.1,
+        "Closed with monetary relief": 0.7,
+        "Closed with non-monetary relief": 0.6,
+        "Untimely response": 0.6
+      }
+    },
+    "validation_macro_ap": 0.664481,
+    "decision_bias": {
+      "Closed with explanation": 1.0,
+      "Closed with monetary relief": 1.0,
+      "Closed with non-monetary relief": 1.0,
+      "Untimely response": 1.6207
+    },
+    "validation_macro_f1_after_bias": 0.662074,
+    "hierarchical_agentic": {
+      "core_classwise_reliability": {
+        "semantic_e5": {
+          "Closed with explanation": 0.6,
+          "Closed with monetary relief": 0.5,
+          "Closed with non-monetary relief": 0.9,
+          "Untimely response": 0.8
+        },
+        "structured": {
+          "Closed with explanation": 0.0,
+          "Closed with monetary relief": 0.3,
+          "Closed with non-monetary relief": 0.0,
+          "Untimely response": 0.0
+        },
+        "joint_e5": {
+          "Closed with explanation": 0.4,
+          "Closed with monetary relief": 0.2,
+          "Closed with non-monetary relief": 0.1,
+          "Untimely response": 0.2
+        }
+      },
+      "evidence_classwise_reliability": {
+        "core_debate": {
+          "Closed with explanation": 0.9,
+          "Closed with monetary relief": 0.4,
+          "Closed with non-monetary relief": 0.3,
+          "Untimely response": 0.4
+        },
+        "semantic_cases": {
+          "Closed with explanation": 0.0,
+          "Closed with monetary relief": 0.0,
+          "Closed with non-monetary relief": 0.1,
+          "Untimely response": 0.0
+        },
+        "rules": {
+          "Closed with explanation": 0.1,
+          "Closed with monetary relief": 0.6,
+          "Closed with non-monetary relief": 0.6,
+          "Untimely response": 0.6
+        }
+      },
+      "validation_core_macro_ap": 0.664334,
+      "validation_macro_ap": 0.666681,
+      "decision_bias": {
+        "Closed with explanation": 1.0,
+        "Closed with monetary relief": 0.8513,
+        "Closed with non-monetary relief": 1.1746,
+        "Untimely response": 1.9037
+      },
+      "validation_macro_f1_after_bias": 0.66421
+    },
+    "hybrid_case_agentic": {
+      "retrieval_weights": {
+        "lexical": 0.5,
+        "semantic": 0.3,
+        "issue_exact": 0.1,
+        "product_exact": 0.07,
+        "company_exact": 0.03
+      },
+      "mean_validation_support": 0.568673,
+      "mean_test_support": 0.558668,
+      "classwise_reliability": {
+        "joint_e5": {
+          "Closed with explanation": 1.0,
+          "Closed with monetary relief": 0.2,
+          "Closed with non-monetary relief": 0.3,
+          "Untimely response": 0.3
+        },
+        "hybrid_cases": {
+          "Closed with explanation": 0.0,
+          "Closed with monetary relief": 0.0,
+          "Closed with non-monetary relief": 0.2,
+          "Untimely response": 0.0
+        },
+        "rules": {
+          "Closed with explanation": 0.0,
+          "Closed with monetary relief": 0.8,
+          "Closed with non-monetary relief": 0.5,
+          "Untimely response": 0.7
+        }
+      },
+      "validation_macro_ap": 0.663714,
+      "decision_bias": {
+        "Closed with explanation": 1.0,
+        "Closed with monetary relief": 0.7248,
+        "Closed with non-monetary relief": 0.8513,
+        "Untimely response": 1.6207
+      },
+      "validation_macro_f1_after_bias": 0.660508
+    },
+    "fixed_agent_set_ablation": {
+      "semantic_joint_rules": {
+        "agents": [
+          "semantic_e5",
+          "joint_e5",
+          "rules"
+        ],
+        "classwise_reliability": {
+          "semantic_e5": {
+            "Closed with explanation": 0.7,
+            "Closed with monetary relief": 0.3,
+            "Closed with non-monetary relief": 1.0,
+            "Untimely response": 0.5
+          },
+          "joint_e5": {
+            "Closed with explanation": 0.0,
+            "Closed with monetary relief": 0.3,
+            "Closed with non-monetary relief": 0.0,
+            "Untimely response": 0.4
+          },
+          "rules": {
+            "Closed with explanation": 0.3,
+            "Closed with monetary relief": 0.4,
+            "Closed with non-monetary relief": 0.0,
+            "Untimely response": 0.1
+          }
+        },
+        "validation_macro_ap": 0.667565,
+        "validation_macro_f1_after_bias": 0.6632,
+        "decision_bias": {
+          "Closed with explanation": 1.0,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 0.617,
+          "Untimely response": 1.1746
+        }
+      },
+      "semantic_cases_rules": {
+        "agents": [
+          "semantic_e5",
+          "semantic_cases",
+          "rules"
+        ],
+        "classwise_reliability": {
+          "semantic_e5": {
+            "Closed with explanation": 0.9,
+            "Closed with monetary relief": 0.3,
+            "Closed with non-monetary relief": 0.4,
+            "Untimely response": 0.4
+          },
+          "semantic_cases": {
+            "Closed with explanation": 0.0,
+            "Closed with monetary relief": 0.0,
+            "Closed with non-monetary relief": 0.0,
+            "Untimely response": 0.0
+          },
+          "rules": {
+            "Closed with explanation": 0.1,
+            "Closed with monetary relief": 0.7,
+            "Closed with non-monetary relief": 0.6,
+            "Untimely response": 0.6
+          }
+        },
+        "validation_macro_ap": 0.666647,
+        "validation_macro_f1_after_bias": 0.666284,
+        "decision_bias": {
+          "Closed with explanation": 1.0,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 1.0,
+          "Untimely response": 1.9037
+        }
+      },
+      "semantic_joint_cases": {
+        "agents": [
+          "semantic_e5",
+          "joint_e5",
+          "semantic_cases"
+        ],
+        "classwise_reliability": {
+          "semantic_e5": {
+            "Closed with explanation": 0.5,
+            "Closed with monetary relief": 0.4,
+            "Closed with non-monetary relief": 0.8,
+            "Untimely response": 0.9
+          },
+          "joint_e5": {
+            "Closed with explanation": 0.5,
+            "Closed with monetary relief": 0.6,
+            "Closed with non-monetary relief": 0.2,
+            "Untimely response": 0.1
+          },
+          "semantic_cases": {
+            "Closed with explanation": 0.0,
+            "Closed with monetary relief": 0.0,
+            "Closed with non-monetary relief": 0.0,
+            "Untimely response": 0.0
+          }
+        },
+        "validation_macro_ap": 0.664127,
+        "validation_macro_f1_after_bias": 0.665138,
+        "decision_bias": {
+          "Closed with explanation": 2.2361,
+          "Closed with monetary relief": 0.7248,
+          "Closed with non-monetary relief": 1.1746,
+          "Untimely response": 1.6207
+        }
+      },
+      "structured_semantic_rules": {
+        "agents": [
+          "structured",
+          "semantic_e5",
+          "rules"
+        ],
+        "classwise_reliability": {
+          "structured": {
+            "Closed with explanation": 0.0,
+            "Closed with monetary relief": 0.0,
+            "Closed with non-monetary relief": 0.0,
+            "Untimely response": 0.0
+          },
+          "semantic_e5": {
+            "Closed with explanation": 0.9,
+            "Closed with monetary relief": 0.2,
+            "Closed with non-monetary relief": 0.4,
+            "Untimely response": 0.4
+          },
+          "rules": {
+            "Closed with explanation": 0.1,
+            "Closed with monetary relief": 0.8,
+            "Closed with non-monetary relief": 0.6,
+            "Untimely response": 0.6
+          }
+        },
+        "validation_macro_ap": 0.666738,
+        "validation_macro_f1_after_bias": 0.66679,
+        "decision_bias": {
+          "Closed with explanation": 0.8513,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 0.8513,
+          "Untimely response": 1.6207
+        }
+      }
+    },
+    "selected_agent_set_by_validation_macro_ap": "semantic_joint_rules",
+    "conservative_blend_ablation": {
+      "semantic_joint_rules": {
+        "candidate_weight": 1.0,
+        "base_weight": 0.0,
+        "validation_macro_ap": 0.667565,
+        "validation_macro_f1_after_bias": 0.6632,
+        "decision_bias": {
+          "Closed with explanation": 1.0,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 0.617,
+          "Untimely response": 1.1746
+        }
+      },
+      "semantic_cases_rules": {
+        "candidate_weight": 0.9,
+        "base_weight": 0.1,
+        "validation_macro_ap": 0.666957,
+        "validation_macro_f1_after_bias": 0.666576,
+        "decision_bias": {
+          "Closed with explanation": 1.0,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 0.8513,
+          "Untimely response": 1.9037
+        }
+      },
+      "semantic_joint_cases": {
+        "candidate_weight": 0.3,
+        "base_weight": 0.7,
+        "validation_macro_ap": 0.665306,
+        "validation_macro_f1_after_bias": 0.664181,
+        "decision_bias": {
+          "Closed with explanation": 1.3797,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 1.3797,
+          "Untimely response": 1.6207
+        }
+      },
+      "structured_semantic_rules": {
+        "candidate_weight": 0.95,
+        "base_weight": 0.05,
+        "validation_macro_ap": 0.667114,
+        "validation_macro_f1_after_bias": 0.66744,
+        "decision_bias": {
+          "Closed with explanation": 0.8513,
+          "Closed with monetary relief": 1.0,
+          "Closed with non-monetary relief": 0.8513,
+          "Untimely response": 1.6207
+        }
+      }
+    },
+    "selected_blend_by_validation_macro_ap": "semantic_joint_rules"
+  },
+  "test_metrics": {
+    "b1_structured_catboost": {
+      "macro_average_precision": 0.377641,
+      "macro_ovr_auroc": 0.765038,
+      "macro_f1": 0.294228,
+      "weighted_f1": 0.350179,
+      "accuracy": 0.324261,
+      "log_loss": 1.185707
+    },
+    "b2_frozen_e5_catboost": {
+      "macro_average_precision": 0.637512,
+      "macro_ovr_auroc": 0.911381,
+      "macro_f1": 0.589158,
+      "weighted_f1": 0.751745,
+      "accuracy": 0.714161,
+      "log_loss": 0.676441
+    },
+    "b3_joint_frozen_e5_catboost": {
+      "macro_average_precision": 0.643487,
+      "macro_ovr_auroc": 0.909731,
+      "macro_f1": 0.585411,
+      "weighted_f1": 0.749162,
+      "accuracy": 0.711105,
+      "log_loss": 0.679474
+    },
+    "a1_semantic_case_retrieval": {
+      "macro_average_precision": 0.4388,
+      "macro_ovr_auroc": 0.759164,
+      "macro_f1": 0.351543,
+      "weighted_f1": 0.762588,
+      "accuracy": 0.818949,
+      "log_loss": 0.578327
+    },
+    "a1b_hybrid_case_retrieval": {
+      "macro_average_precision": 0.542728,
+      "macro_ovr_auroc": 0.82194,
+      "macro_f1": 0.474781,
+      "weighted_f1": 0.793074,
+      "accuracy": 0.831175,
+      "log_loss": 0.496733
+    },
+    "a2_field_rule_agent": {
+      "macro_average_precision": 0.592632,
+      "macro_ovr_auroc": 0.884303,
+      "macro_f1": 0.224653,
+      "weighted_f1": 0.733172,
+      "accuracy": 0.815893,
+      "log_loss": 0.49754
+    },
+    "proposed_classwise_e5_consensus": {
+      "macro_average_precision": 0.645104,
+      "macro_ovr_auroc": 0.91096,
+      "macro_f1": 0.652304,
+      "weighted_f1": 0.826952,
+      "accuracy": 0.816912,
+      "log_loss": 0.526699
+    },
+    "proposed_hierarchical_agentic_consensus": {
+      "macro_average_precision": 0.64297,
+      "macro_ovr_auroc": 0.912116,
+      "macro_f1": 0.650163,
+      "weighted_f1": 0.825634,
+      "accuracy": 0.814583,
+      "log_loss": 0.541795
+    },
+    "proposed_hybrid_case_consensus": {
+      "macro_average_precision": 0.646519,
+      "macro_ovr_auroc": 0.91126,
+      "macro_f1": 0.65471,
+      "weighted_f1": 0.832598,
+      "accuracy": 0.82739,
+      "log_loss": 0.545436
+    },
+    "agent_set_semantic_joint_rules": {
+      "macro_average_precision": 0.641114,
+      "macro_ovr_auroc": 0.911534,
+      "macro_f1": 0.641287,
+      "weighted_f1": 0.820958,
+      "accuracy": 0.809198,
+      "log_loss": 0.54762
+    },
+    "agent_set_semantic_cases_rules": {
+      "macro_average_precision": 0.63921,
+      "macro_ovr_auroc": 0.913175,
+      "macro_f1": 0.646825,
+      "weighted_f1": 0.824388,
+      "accuracy": 0.812837,
+      "log_loss": 0.529806
+    },
+    "agent_set_semantic_joint_cases": {
+      "macro_average_precision": 0.644308,
+      "macro_ovr_auroc": 0.911746,
+      "macro_f1": 0.645302,
+      "weighted_f1": 0.824271,
+      "accuracy": 0.814146,
+      "log_loss": 0.675549
+    },
+    "agent_set_structured_semantic_rules": {
+      "macro_average_precision": 0.639497,
+      "macro_ovr_auroc": 0.913297,
+      "macro_f1": 0.644815,
+      "weighted_f1": 0.824089,
+      "accuracy": 0.812982,
+      "log_loss": 0.522169
+    },
+    "blend_base_with_semantic_joint_rules": {
+      "macro_average_precision": 0.641114,
+      "macro_ovr_auroc": 0.911534,
+      "macro_f1": 0.641287,
+      "weighted_f1": 0.820958,
+      "accuracy": 0.809198,
+      "log_loss": 0.54762
+    },
+    "blend_base_with_semantic_cases_rules": {
+      "macro_average_precision": 0.641763,
+      "macro_ovr_auroc": 0.91324,
+      "macro_f1": 0.647879,
+      "weighted_f1": 0.827087,
+      "accuracy": 0.81793,
+      "log_loss": 0.529181
+    },
+    "blend_base_with_semantic_joint_cases": {
+      "macro_average_precision": 0.646152,
+      "macro_ovr_auroc": 0.912527,
+      "macro_f1": 0.645802,
+      "weighted_f1": 0.819702,
+      "accuracy": 0.807161,
+      "log_loss": 0.557426
+    },
+    "blend_base_with_structured_semantic_rules": {
+      "macro_average_precision": 0.640882,
+      "macro_ovr_auroc": 0.913357,
+      "macro_f1": 0.6448,
+      "weighted_f1": 0.824284,
+      "accuracy": 0.813128,
+      "log_loss": 0.52219
+    }
+  },
+  "headline": {
+    "primary_metric": "macro_average_precision",
+    "strongest_frozen_baseline": "b3_joint_frozen_e5_catboost",
+    "selected_proposed": "proposed_hybrid_case_consensus",
+    "relative_gain_vs_strongest_pct": 0.471
+  },
+  "environment": {
+    "python": "3.12.14",
+    "platform": "macOS-26.3.2-arm64-arm-64bit",
+    "seed": 20261122,
+    "wall_seconds": 72.841
+  }
+}

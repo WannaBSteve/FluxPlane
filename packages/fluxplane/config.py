@@ -21,6 +21,7 @@ class Settings(BaseSettings):
     analysis_model: str = ""
     analysis_api_key: str = Field(default="", repr=False)
     analysis_timeout_seconds: int = Field(default=60, ge=1, le=180)
+    analysis_response_format: bool = False
     http_allowed_hosts: str = ""
     max_query_rows: int = Field(default=1000, ge=1, le=10000)
     worker_lease_seconds: int = Field(default=120, ge=10)
@@ -51,4 +52,3 @@ class Settings(BaseSettings):
 
 def settings() -> Settings:
     return Settings()
-

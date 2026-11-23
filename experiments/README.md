@@ -28,6 +28,7 @@ The first percentage is relative to a deliberately simple baseline. Against the 
 
 ## Experiments
 
+- [Technical metrics and formal result tables](RESULTS.md) provides the screenshot-ready summary, strong baselines, ablations and source records.
 - [Consumer response prediction](consumer-complaints/README.md) defines the multimodal task, metrics, baselines, ablations and full result table.
 - [Fraud under temporal drift](fraud-drift/README.md) evaluates feature provenance when an apparently predictive field stops being dependable.
 - [Query/update scheduling](scheduling/README.md) measures latency, freshness and throughput under the same workload.

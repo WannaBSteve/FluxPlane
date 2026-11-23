@@ -1,5 +1,8 @@
 # 本地性能测量
 
+> 多模态算法、特征质量和自适应调度的正式结果见
+> [技术指标与实验结果](../experiments/RESULTS.md)。本页保留平台基础性能与历史负载测量。
+
 使用 [`examples/benchmark_local.py`](../examples/benchmark_local.py) 在临时目录中生成 100 万行、四个分区值的 Parquet 数据，建立独立 SQLite 目录，执行同步、过滤聚合查询、分区布局构建与控制接口读取。查询时间包括平台任务处理；执行器时间只包括 DuckDB 查询，按原始快照与布局交替测量。每轮有五个查询样本和 100 次控制接口读取。原始结果：[第 1 轮](benchmarks/local-1.json)、[第 2 轮](benchmarks/local-2.json)、[第 3 轮](benchmarks/local-3.json)。
 
 | 指标 | 第 1 轮 | 第 2 轮 | 第 3 轮 |
